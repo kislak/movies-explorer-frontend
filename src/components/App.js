@@ -1,4 +1,5 @@
 import React from "react";
+
 import {
   BrowserRouter,
   Routes,
@@ -18,8 +19,6 @@ function App(props) {
       <Routes>
         <Route path="/" element={<Landing/>}>
         </Route>
-        <Route path="/landing" element={<Landing/>}>
-        </Route>
         <Route path="/main" element={<Main/>}>
         </Route>
         <Route path="/saved" element={<Main saved={true}/>}>
@@ -32,8 +31,6 @@ function App(props) {
         </Route>
         <Route path="*" element={<NotFound/>}>
         </Route>
-
-
       </Routes>
     </BrowserRouter>
   )
