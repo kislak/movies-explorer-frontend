@@ -28,7 +28,6 @@
 
 
 .header__link {
-  font-family: Inter;
   font-style: normal;
   font-weight: 500;
   font-size: 12px;
@@ -43,7 +42,6 @@
 
 .header__button {
   box-sizing: border-box;
-  font-family: Inter;
   font-style: normal;
   font-weight: 500;
   font-size: 14px;

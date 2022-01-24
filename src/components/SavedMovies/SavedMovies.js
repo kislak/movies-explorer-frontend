@@ -1,5 +1,6 @@
 import React from "react";
 import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
 
 function SavedMovies(props) {
   return (
@@ -8,6 +9,7 @@ function SavedMovies(props) {
       <div>
         Saved movies
       </div>
+      <Footer/>
     </div>
   )
 }
