@@ -1,0 +1,11 @@
+.about-me {
+
+}
+
+.about-me__photo {
+  object-fit: cover;
+  object-position: top center;
+  height: 327px;
+  width: 270px;
+  border-radius: 10px;
+}
