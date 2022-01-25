@@ -7,7 +7,7 @@
   -moz-text-size-adjust: 100%;
   max-width: 880px;
   margin: 0 auto;
-  background-color: #000;
   color: #FFF;
-  font-family: 'Inter', Arial, sans-serif;
+  font-family: Inter, Arial, sans-serif;
+  background: #FAFAFA;
 }

@@ -1,0 +1,33 @@
+.nav-tab {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+}
+
+.nav-tab__item {
+  margin: 0px 5px ;
+}
+
+.nav-tab__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+  min-height: 36px;
+  min-width: 96px;
+
+  text-align: center;
+  text-decoration: none;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+
+  background: #E8E8E8;
+  color: #000000;
+}
