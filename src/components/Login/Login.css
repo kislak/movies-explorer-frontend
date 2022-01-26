@@ -1,11 +1,11 @@
-.register {
+.login {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   max-width: 540px;
   margin: 40px auto;
 }
-.register__container {
+.login__container {
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -13,7 +13,7 @@
   margin: auto;
 }
 
-.register__title {
+.login__title {
   margin-top: 20px;
   font-family: Inter;
   font-size: 24px;
@@ -24,7 +24,7 @@
   text-align: left;
 }
 
-.register__input {
+.login__input {
   margin: 5px auto 24px;
   width: 396px;
   color: #000000;
@@ -41,15 +41,15 @@
   text-align: left;
 }
 
-.register__input:last-child {
+.login__input:last-child {
   border-bottom: none;
 }
 
-.register__input_error {
+.login__input_error {
   color: #EE3465;
 }
 
-.register__input-label {
+.login__input-label {
   font-family: Inter;
   font-size: 10px;
   font-style: normal;
@@ -59,13 +59,13 @@
   text-align: left;
 }
 
-.register__error-text {
+.login__error-text {
   margin: 0;
   padding: 0;
   color: #EE3465;
 }
 
-.register__submit {
+.login__submit {
   width: 396px;
   height: 45px;
   background: #3456F3;
@@ -82,12 +82,12 @@
   text-align: center;
 }
 
-.register__submit:hover {
+.login__submit:hover {
   opacity: 0.6;
   cursor: pointer;
 }
 
-.register__ref {
+.login__ref {
   margin-top: 30px;
   font-family: Inter;
   font-size: 14px;
@@ -99,12 +99,12 @@
   color: #A0A0A0
 }
 
-.register__link {
+.login__link {
   text-decoration: none;
   color: #3456F3
 }
 
-.register__link:hover {
+.login__link:hover {
   opacity: 0.6;
   cursor: pointer;
 }

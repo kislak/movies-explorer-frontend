@@ -1,7 +1,9 @@
 import React from "react";
 import Header from "../Header/Header";
+import {useNavigate} from "react-router-dom";
 
 function Register(props) {
+  const navigate = useNavigate();
   return (
     <section className="register">
       <Header headerOnly={true} />
@@ -66,7 +68,7 @@ function Register(props) {
             Зарегистрироваться
           </button>
           <div className="register__ref" >
-            Уже зарегистрированы? <a className="register__link" href="#" >Войти</a>
+            Уже зарегистрированы? <a className="register__link" onClick={() => navigate('/signin') } >Войти</a>
           </div>
         </form>
       </section>
