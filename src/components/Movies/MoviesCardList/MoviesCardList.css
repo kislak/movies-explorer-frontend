@@ -1,0 +1,28 @@
+.movies-card-list__items {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 40px;
+  row-gap: 60px;
+  margin: 70px;
+}
+
+.movies-card-list__actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.movies-card-list__more {
+  height: 36px;
+  width: 320px;
+  border-radius: 6px;
+  background: #F4F4F4;
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 15px;
+  letter-spacing: 0px;
+  text-align: center;
+  border: none;
+}

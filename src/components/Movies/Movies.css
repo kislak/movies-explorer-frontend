@@ -1,0 +1,8 @@
+@import url("SearchForm/SearchForm.css");
+@import url("MoviesCardList/MoviesCardList.css");
+@import url("MoviesCard/MoviesCard.css");
+
+.movies {
+  display: flex;
+  flex-direction: column;
+}
