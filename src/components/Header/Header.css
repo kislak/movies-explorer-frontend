@@ -4,6 +4,7 @@
   align-items: center;
   min-height: 74px;
   margin: 0 70px;
+  flex-wrap: wrap;
 }
 
 .header__nav {
