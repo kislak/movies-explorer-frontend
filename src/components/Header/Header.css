@@ -1,16 +1,13 @@
+@import url("Navigation/Navigation.css");
+
 .header {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
+  flex-wrap: wrap;
   min-height: 74px;
   margin: 0 70px;
-  flex-wrap: wrap;
-}
 
-.header__nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
 .header__logo {
@@ -26,61 +23,3 @@
   opacity: 0.6;
   cursor: pointer;
 }
-
-.header__link {
-  font-style: normal;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 16px;
-  margin-left: 30px;
-}
-
-.header__link:hover {
-  opacity: 0.6;
-  cursor: pointer;
-}
-
-.header__button {
-  box-sizing: border-box;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 16px;
-
-  border-radius: 3px;
-  height: 32px;
-  margin-left: 30px;
-  border: 0px;
-  padding: 8px 20px;
-}
-
-.header__button:hover {
-  opacity: 0.6;
-  cursor: pointer;
-}
-
-
-.header__button_blue{
-  background: #3456F3;
-  color: #FFFFFF;
-}
-
-.header__button_profile {
-  border: 2px solid rgba(170, 170, 170, .2);
-  border-radius: 50px;
-  background: white;
-  padding: 8px 12px;
-}
-.header__button_profile:before {
-  content: "";
-  display: block;
-  background: url(../../images/account.svg) no-repeat;
-  background-size: contain;
-  background-repeat: no-repeat;
-  width: 12px;
-  height: 14px;
-  float: left;
-  margin: 0 7px 0 0;
-}
-
-
