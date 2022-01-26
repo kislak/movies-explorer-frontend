@@ -2,7 +2,8 @@ import React from "react";
 function AboutMe(props) {
   return (
     <section className="about-me">
-      <h2 className="about-me__title">
+        <a name="about-me"/>
+        <h2 className="about-me__title">
         Студент
       </h2>
       <div className="about-me__details">
@@ -25,14 +26,14 @@ function AboutMe(props) {
                 После того, как прошёл курс по веб-разработке,
                 начал заниматься фриланс-заказами.
             </p>
-            <ul className="about-me__link-items">
-                <li className="about-me__link-item">
-                    <a className="about-me__link" href="#">
+            <ul className="about-me__links">
+                <li>
+                    <a className="about-me__link" href="https://www.facebook.com/kislak.sergey" target="_blank">
                         Facebook
                     </a>
                 </li>
-                <li className="about-me__link">
-                    <a className="about-me__link" href="#">
+                <li>
+                    <a className="about-me__link" href="https://github.com/kislak" target="_blank">
                         Github
                     </a>
                 </li>
@@ -43,19 +44,19 @@ function AboutMe(props) {
           <h2 className="about-me__portfolio-title">Портфолио</h2>
           <ul className="about-me__portfolio-items">
               <li className="about-me__portfolio-item">
-                  <a className="about-me__portfolio-link" href="#">
+                  <a className="about-me__portfolio-link" href="https://kislak.github.io/how-to-learn/" target="_blank">
                       Статичный сайт
                       <span className="about-me__portfolio-arrow">↗</span>
                   </a>
               </li>
               <li className="about-me__portfolio-item">
-                  <a className="about-me__portfolio-link" href="#">
+                  <a className="about-me__portfolio-link" href="https://kislak.github.io/russian-travel/" target="_blank">
                       Адаптивный сайт
                     <span className="about-me__portfolio-arrow">↗</span>
                   </a>
               </li>
               <li className="about-me__portfolio-item">
-                  <a className="about-me__portfolio-link" href="#">
+                  <a className="about-me__portfolio-link" href="https://kurs.nomoredomains.rocks" target="_blank">
                       Одностраничное приложение
                     <span className="about-me__portfolio-arrow">↗</span>
                   </a>

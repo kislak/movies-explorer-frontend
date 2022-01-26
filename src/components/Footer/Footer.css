@@ -30,13 +30,22 @@
   flex-direction: row;
   align-items: center;
   justify-items: flex-end;
-
-  /*display: grid;*/
-  /*grid-template-rows: repeat(auto-fit, 1fr);*/
-  /*gap: 1px;*/
 }
 
 .footer__link {
   margin-left: 20px ;
+  text-decoration: none;
+  font-family: Inter;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0px;
+  color: #000000;
+}
+
+.footer__link:hover {
+  opacity: 0.6;
+  cursor: pointer;
 }
 

@@ -12,14 +12,20 @@ function Footer(props) {
         </p>
 
         <ul className="footer__links">
-          <li className="footer__link">
-            Яндекс.Практикум
+          <li>
+            <a className="footer__link" href="https://practicum.yandex.ru/" target="_blank">
+              Яндекс.Практикум
+            </a>
           </li>
-          <li className="footer__link">
-            Github
+          <li>
+            <a className="footer__link" href="https://github.com/yandex/" target="_blank">
+              Github
+            </a>
           </li>
-          <li className="footer__link">
-            Facebook
+          <li>
+            <a className="footer__link" href="https://www.facebook.com/yandex/" target="_blank">
+              Facebook
+            </a>
           </li>
         </ul>
       </div>

@@ -1,8 +1,11 @@
 @import url("SearchForm/SearchForm.css");
 @import url("MoviesCardList/MoviesCardList.css");
 @import url("MoviesCard/MoviesCard.css");
+@import url("FilterCheckbox/FilterCheckBox.css");
 
 .movies {
   display: flex;
   flex-direction: column;
+  align-items: stretch;
 }
+

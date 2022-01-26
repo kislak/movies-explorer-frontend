@@ -8,14 +8,14 @@ import AboutMe from "./AboutMe/AboutMe";
 
 function Main(props) {
   return (
-    <div className="main">
+    <section className="main">
       <Header/>
       <Promo />
       <AboutProject/>
       <Techs/>
       <AboutMe/>
       <Footer/>
-    </div>
+    </section>
   )
 }
 

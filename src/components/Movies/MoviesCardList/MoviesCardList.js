@@ -1,5 +1,6 @@
 import React from "react";
 import MoviesCard from "../MoviesCard/MoviesCard";
+
 function MoviesCardList(props) {
   return (
     <seciton className="movies-card-list">
