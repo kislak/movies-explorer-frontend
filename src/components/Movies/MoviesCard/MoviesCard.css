@@ -4,13 +4,6 @@
   max-width: 360px;
 }
 
-@media (max-width: 1280px) {
-  .movies-card {
-    max-width: 339px;
-  }
-}
-
-
 .movies-card__img {
   width: 339px;
   object-fit: cover;
@@ -18,7 +11,6 @@
   height: 190px;
   border-radius: 10px;
 }
-
 
 .movies-card__details {
   margin: 14px;
@@ -49,3 +41,19 @@
   text-align: center;
   color: #A0A0A0;
 }
+
+@media (max-width: 560px) {
+  .movies-card__img {
+    margin: 0px;
+    padding: 0px;
+    width: 300px;
+    height: 168px;
+  }
+  .movies-card {
+    /*max-width: 300px;*/
+  }
+  .movies-card__details {
+    margin: 10px;
+  }
+}
+

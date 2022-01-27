@@ -9,3 +9,9 @@
   align-items: stretch;
 }
 
+@media (max-width: 560px) {
+  .movies {
+    padding: 0;
+    margin: 0;
+  }
+}
