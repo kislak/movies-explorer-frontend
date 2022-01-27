@@ -6,7 +6,7 @@ function Navigation(props) {
   const navigate = useNavigate();
   return (
     <nav className="navigation">
-      <section className="navigation__block">
+      <section className="navigation__block navigation__block_large">
         <a
           className="navigation__link"
           onClick={() => navigate('/movies') }
