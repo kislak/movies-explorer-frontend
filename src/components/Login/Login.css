@@ -5,12 +5,25 @@
   max-width: 540px;
   margin: 40px auto;
 }
+
+@media (max-width: 1280px) {
+  .login {
+    margin-top: 236px;
+    max-width: 460px;
+  }
+}
+
 .login__container {
   display: flex;
   flex-direction: column;
   align-items: stretch;
   max-width: 396px;
   margin: auto;
+}
+
+.login__fields {
+  min-height: 270px;
+  margin-bottom: 70px;
 }
 
 .login__title {

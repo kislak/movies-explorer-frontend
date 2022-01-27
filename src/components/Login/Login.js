@@ -13,39 +13,39 @@ function Login(props) {
         </h1>
 
         <form className="login__form" name="login">
+          <section className="login__fields">
+            <label
+              htmlFor="login__input-name"
+              className="login__input-label"
+            >
+              E-mail
+            </label>
 
-          <label
-            htmlFor="login__input-name"
-            className="login__input-label"
-          >
-            E-mail
-          </label>
+            <input
+              id="login__input-email"
+              className="login__input"
+              type="text"
+              name="email"
+              autoComplete="off"
+              required
+            />
 
-          <input
-            id="login__input-email"
-            className="login__input"
-            type="text"
-            name="email"
-            autoComplete="off"
-            required
-          />
+            <label
+              htmlFor="login__input-name"
+              className="login__input-label"
+            >
+              Пароль
+            </label>
 
-          <label
-            htmlFor="login__input-name"
-            className="login__input-label"
-          >
-            Пароль
-          </label>
-
-          <input
-            id="login__input-password"
-            className="login__input login__input_error"
-            type="password"
-            name="password"
-            autoComplete="off"
-            required
-          />
-
+            <input
+              id="login__input-password"
+              className="login__input login__input_error"
+              type="password"
+              name="password"
+              autoComplete="off"
+              required
+            />
+          </section>
           <button className="login__submit" type="submit">
             Войти
           </button>

@@ -32,6 +32,14 @@
   color: #000000;
 }
 
+
+@media (max-width: 560px) {
+  .nav-tab__button {
+    min-height: 26px;
+    min-width: 82px;
+  }
+}
+
 .nav-tab__button:hover {
   opacity: 0.6;
   cursor: pointer;

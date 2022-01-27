@@ -3,6 +3,8 @@
   flex-direction: column;
 }
 
+
+
 .not-found__code {
   margin: 246px auto 0;
   font-family: Inter;
@@ -12,6 +14,13 @@
   line-height: 169px;
   letter-spacing: 0em;
   text-align: center;
+}
+
+@media (max-width: 1280px) {
+  .not-found__code {
+    margin-top: 408px;
+    max-width: 460px;
+  }
 }
 
 .not-found__details{

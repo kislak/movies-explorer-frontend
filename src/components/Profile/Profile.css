@@ -15,6 +15,20 @@
   text-align: center;
 }
 
+@media (max-width: 1280px) {
+  .profile__welcome{
+    margin-top: 236px;
+  }
+
+  .profile__details {
+    margin-top: 90px;
+  }
+
+  .profile__links {
+    margin-top: 210px;
+  }
+}
+
 .profile__details {
   margin: 120px auto 0;
 

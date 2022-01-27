@@ -19,3 +19,23 @@
   letter-spacing: -0.04em;
   font-family: Inter;
 }
+
+@media (max-width: 1280px) {
+  .promo {
+    margin: 20px 20px 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .promo {
+    margin: 14px 14px 0;
+  }
+
+  .promo__text {
+    max-width: 292px;
+    font-size: 29px;
+    line-height: 37px;
+    margin: 220px auto;
+  }
+}
+

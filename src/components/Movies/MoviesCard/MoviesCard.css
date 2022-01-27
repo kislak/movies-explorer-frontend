@@ -4,11 +4,18 @@
   max-width: 360px;
 }
 
+@media (max-width: 1280px) {
+  .movies-card {
+    max-width: 339px;
+  }
+}
+
+
 .movies-card__img {
-  width: 360px;
+  width: 339px;
   object-fit: cover;
   object-position: top center;
-  height: 201px;
+  height: 190px;
   border-radius: 10px;
 }
 

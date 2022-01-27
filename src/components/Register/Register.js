@@ -13,6 +13,7 @@ function Register(props) {
         </h1>
 
         <form className="register__form" name="register">
+          <section className="register__fields">
           <label
             htmlFor="register__input-name"
             className="register__input-label"
@@ -63,7 +64,7 @@ function Register(props) {
           <p className="register__error-text">
             Что-то пошло не так...
           </p>
-
+          </section>
           <button className="register__submit" type="submit">
             Зарегистрироваться
           </button>
