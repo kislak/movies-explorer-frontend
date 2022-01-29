@@ -6,7 +6,7 @@ import MoviesCardList from "../Movies/MoviesCardList/MoviesCardList";
 
 function SavedMovies(props) {
   return (
-    <div className="saved-movies">
+    <div className="movies saved-movies">
       <Header/>
       <SearchForm/>
       <MoviesCardList/>

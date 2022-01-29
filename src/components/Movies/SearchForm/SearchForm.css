@@ -1,7 +1,8 @@
 .search-form {
-  margin: 80px 70px 0;
+  margin: 80px auto 0;
   padding-bottom: 40px;
   border-bottom: #E8E8E8 solid 1px;
+  max-width: 1120px;
 }
 .search-form__bar{
   display: flex;

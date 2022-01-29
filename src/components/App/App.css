@@ -9,10 +9,3 @@
   font-family: Inter, Arial, sans-serif;
   scroll-behavior: smooth;
 }
-
-@media (max-width: 560px) {
-  .app {
-    background: #FAFAFA;
-  }
-}
-

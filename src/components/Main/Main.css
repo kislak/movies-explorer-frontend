@@ -4,3 +4,10 @@
 @import url("Techs/Techs.css");
 @import url("AboutMe/AboutMe.css");
 @import url("Portfolio/Portfolio.css");
+
+@media (max-width: 560px) {
+  .main {
+    background: #FAFAFA;
+  }
+}
+

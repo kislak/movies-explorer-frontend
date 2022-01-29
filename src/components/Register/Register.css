@@ -1,16 +1,7 @@
 .register {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  max-width: 540px;
-  margin: 40px auto;
-}
-
-@media (max-width: 1280px) {
-  .register {
-    margin-top: 236px;
-    max-width: 460px;
-  }
+  max-width: 400px;
+  margin: 0px auto;
+  padding-top: 70px;
 }
 
 .register__container {
@@ -70,6 +61,7 @@
   line-height: 12px;
   letter-spacing: 0em;
   text-align: left;
+  display: block;
 }
 
 .register__error-text {
@@ -121,4 +113,28 @@
 .register__link:hover {
   opacity: 0.6;
   cursor: pointer;
+}
+
+@media (max-width: 1280px) {
+  .register {
+    padding: 236px 30px 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .register {
+    padding: 30px 30px 0;
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .register__input {
+    width: 260px;
+  }
+  .register__submit {
+    width: 260px;
+  }
 }
