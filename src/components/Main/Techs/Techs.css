@@ -1,10 +1,14 @@
 .techs{
-  padding: 0 70px;
+  padding: 100px 70px;
   background: #F5F5F5;
 }
 
+.techs_container {
+  margin: 0px auto;
+  max-width: 1120px;
+}
+
 .techs__title {
-  margin-top: 110px;
   font-family: Inter;
   font-style: normal;
   font-weight: normal;
@@ -64,8 +68,17 @@
 
 @media (max-width: 1280px) {
   .techs {
-    padding: 0 50px;
+    margin: 0;
+    padding: 0;
   }
+  .techs_container {
+    padding: 90px 50px;
+  }
+  .techs_container {
+    margin: 0px auto;
+    max-width: 1120px;
+  }
+
 
   .techs__list-item {
     min-width: 84px;
@@ -84,8 +97,12 @@
 @media (max-width: 560px) {
   .techs {
     background: #FAFAFA;
-    padding: 70px 18px;
   }
+
+  .techs_container {
+    padding: 70px 18px 0;
+  }
+
 
   .techs__title {
     font-size: 18px;

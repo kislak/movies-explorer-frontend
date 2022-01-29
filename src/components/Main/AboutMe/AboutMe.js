@@ -41,28 +41,6 @@ function AboutMe(props) {
         </div>
         <img className="about-me__photo" src="https://avatars.githubusercontent.com/u/583063?v=4" alt="мое фото"/>
       </div>
-          <h2 className="about-me__portfolio-title">Портфолио</h2>
-          <ul className="about-me__portfolio-items">
-              <li className="about-me__portfolio-item">
-                  <a className="about-me__portfolio-link" href="https://kislak.github.io/how-to-learn/" target="_blank">
-                      Статичный сайт
-                      <span className="about-me__portfolio-arrow">↗</span>
-                  </a>
-              </li>
-              <li className="about-me__portfolio-item">
-                  <a className="about-me__portfolio-link" href="https://kislak.github.io/russian-travel/" target="_blank">
-                      Адаптивный сайт
-                    <span className="about-me__portfolio-arrow">↗</span>
-                  </a>
-              </li>
-              <li className="about-me__portfolio-item">
-                  <a className="about-me__portfolio-link" href="https://kurs.nomoredomains.rocks" target="_blank">
-                      Одностраничное приложение
-                    <span className="about-me__portfolio-arrow">↗</span>
-                  </a>
-              </li>
-
-          </ul>
     </section>
   )
 }

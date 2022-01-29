@@ -3,8 +3,4 @@
 @import url("AboutProject/AboutProject.css");
 @import url("Techs/Techs.css");
 @import url("AboutMe/AboutMe.css");
-
-.main {
-  display: flex;
-  flex-direction: column;
-}
+@import url("Portfolio/Portfolio.css");
