@@ -39,7 +39,11 @@ function AboutMe(props) {
                 </li>
             </ul>
         </div>
-        <img className="about-me__photo" src="https://avatars.githubusercontent.com/u/583063?v=4" alt="мое фото"/>
+        <img
+          className="about-me__photo"
+          src="https://avatars.githubusercontent.com/u/583063?v=4"
+          alt="мое фото"
+        />
       </div>
     </section>
   )

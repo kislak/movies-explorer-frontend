@@ -5,6 +5,7 @@ function MoviesCard(props) {
       <section className="movies-card__picture">
         <img
           className="movies-card__img"
+          alt="постер фильма"
           src={props.url}
         />
 
