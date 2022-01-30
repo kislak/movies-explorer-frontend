@@ -6,6 +6,10 @@
   flex-wrap: wrap;
 }
 
+.navigation__register {
+  justify-content: flex-end;
+}
+
 .navigation__block {
   display: flex;
   justify-content: space-between;
@@ -58,7 +62,7 @@
 .navigation__button_profile:before {
   content: "";
   display: block;
-  background: url(../../../images/account.svg) no-repeat;
+  background: url(../../images/account.svg) no-repeat;
   background-size: contain;
   background-repeat: no-repeat;
   width: 12px;
@@ -68,17 +72,9 @@
 }
 
 @media (max-width: 1280px) {
-  .navigation__button_profile {
-    display: none;
-  }
-
-  .navigation__block_large {
-    display: none;
-  }
-
-  .navigation {
-    justify-content: flex-end;
-  }
+  /*.navigation {*/
+  /*  justify-content: flex-end;*/
+  /*}*/
 }
 
 @media (max-width: 560px) {
