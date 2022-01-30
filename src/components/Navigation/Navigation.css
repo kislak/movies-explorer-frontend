@@ -1,12 +1,17 @@
 .navigation {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   flex-grow: 1;
   flex-wrap: wrap;
 }
 
-.navigation__register {
+.navigation__desktop {
+  justify-content: space-between;
+}
+
+.navigation__mobile {
+  display: none;
   justify-content: flex-end;
 }
 
@@ -59,6 +64,7 @@
   background: white;
   padding: 8px 12px;
 }
+
 .navigation__button_profile:before {
   content: "";
   display: block;
@@ -71,11 +77,78 @@
   margin: 0 7px 0 0;
 }
 
-@media (max-width: 1280px) {
-  /*.navigation {*/
-  /*  justify-content: flex-end;*/
-  /*}*/
+.navigation__mobile-menu-open {
+  width: 44px;
+  height: 44px;
+  background-image: url("../../images/menu.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  border: none;
+  margin: 20px;
 }
+
+.navigation__mobile-menu-open:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+.navigation__mobile-menu-close {
+  width: 34px;
+  height: 34px;
+  background-image: url("../../images/cross.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  border: none;
+  margin: 20px;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  background-color: #fff;
+}
+
+.navigation__mobile-menu-close:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+.navigation__mobile-menu-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  overflow: hidden;
+  height: 100%;
+
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+  background-color: rgba(0, 0, 0, .5);
+  z-index: 1;
+}
+
+.navigation__mobile-block {
+  background-color: #fff;
+  height: 100%;
+  width: 70%;
+}
+
+.navigation__menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+
+  font-family: Inter;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 22px;
+  letter-spacing: 0px;
+  text-align: center;
+}
+
 
 @media (max-width: 560px) {
   .navigation__link {
@@ -84,5 +157,24 @@
 
   .navigation__button {
     margin-left: 14px;
+  }
+
+  .navigation__button_center {
+    margin-left: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .navigation__desktop {
+    display: none;
+  }
+  .navigation__mobile {
+    display: flex;
+  }
+}
+
+@media (max-width: 460px) {
+  .navigation__mobile-block {
+    width: 100%;
   }
 }
