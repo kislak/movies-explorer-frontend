@@ -12,3 +12,7 @@ https://practicum.yandex.ru/learn/web/courses/347389fe-50f8-4223-937b-d478373f38
 ##react-router
 https://reactrouter.com/docs/en/v6/getting-started/overview
 https://www.youtube.com/watch?v=zEQiNFAwDGo
+
+
+## bem checker
+https://yoksel.github.io/html-tree/

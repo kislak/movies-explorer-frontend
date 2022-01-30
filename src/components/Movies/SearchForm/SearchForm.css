@@ -48,6 +48,11 @@
   text-align: center;
 }
 
+.search-form__submit:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
 .search-form__checkbox {
   margin: 30px auto;
 }

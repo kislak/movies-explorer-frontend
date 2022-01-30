@@ -1,7 +1,7 @@
 import React from "react";
 function MoviesCard(props) {
   return (
-    <seciton className="movies-card">
+    <section className="movies-card">
       <section className="movies-card__picture">
         <img
           className="movies-card__img"
@@ -34,7 +34,7 @@ function MoviesCard(props) {
         <p className="movies-card__title">{props.title}</p>
         <p className="movies-card__time">{props.time}</p>
       </section>
-    </seciton>
+    </section>
   )
 }
 

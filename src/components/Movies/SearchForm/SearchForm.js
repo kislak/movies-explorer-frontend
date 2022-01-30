@@ -10,6 +10,7 @@ function SearchForm(props) {
             type="text"
             placeholder="Фильм"
             autoComplete="off"
+            required
           />
           <button className="search-form__submit" type="submit">
             Найти
