@@ -6,7 +6,7 @@ function Login(props) {
   const navigate = useNavigate();
   return (
     <section className="login">
-      <Header headerOnly={true} />
+      <Header logoOnly={true} />
       <section className="login__container">
         <h1 className="login__title">
           Рады видеть!

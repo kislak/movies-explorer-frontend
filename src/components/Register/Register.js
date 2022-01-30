@@ -6,7 +6,7 @@ function Register(props) {
   const navigate = useNavigate();
   return (
     <section className="register">
-      <Header headerOnly={true} />
+      <Header logoOnly={true} />
       <section className="register__container">
         <h1 className="register__title">
           Добро пожаловать!

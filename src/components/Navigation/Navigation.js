@@ -1,11 +1,11 @@
-import React from "react";
-
+import React, { useState } from 'react';
 import { useNavigate, useLocation } from "react-router-dom/index";
 
 function Navigation(props) {
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const loggedin = ["/movies", "/saved-movies"].includes(pathname)
+  const loggedin = ["/movies", "/saved-movies", "/profile"].includes(pathname)
+  const [isOpen, setIsOpen] = useState(false);
 
   const nav = <>
     <nav className="navigation navigation__desktop">
@@ -33,35 +33,41 @@ function Navigation(props) {
     </nav>
 
     <nav className="navigation navigation__mobile">
+
       <section className="navigation__block">
-        <div className="navigation__mobile-menu-open"> </div>
+        <div
+          className="navigation__mobile-menu-open"
+          onClick={ () => setIsOpen(true)}
+        > </div>
       </section>
 
+      {isOpen &&
       <div className="navigation__mobile-menu-container">
         <section className="navigation__mobile-block">
           <button
             className="navigation__mobile-menu-close"
             type="button"
+            onClick={ () => setIsOpen(false)}
           >
           </button>
 
           <div className="navigation__menu">
             <a
-              className="navigation__link"
+              className="navigation__link navigation__link_mobile"
               onClick={() => navigate('/')}
             >
               Главная
             </a>
 
             <a
-              className="navigation__link"
+              className="navigation__link navigation__link_mobile"
               onClick={() => navigate('/movies')}
             >
               Фильмы
             </a>
 
             <a
-              className="navigation__link"
+              className="navigation__link navigation__link_mobile"
               onClick={() => navigate('/saved-movies')}
             >
               Сохранённые фильмы
@@ -78,6 +84,7 @@ function Navigation(props) {
 
         </section>
       </div>
+      }
     </nav>
   </>
 

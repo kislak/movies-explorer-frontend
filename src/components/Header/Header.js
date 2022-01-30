@@ -11,7 +11,7 @@ function Header(props) {
         className="header__logo"
         onClick={() => navigate('/')}
       />
-      <Navigation/>
+      {!props.logoOnly && <Navigation/> }
     </header>
   )
 }
