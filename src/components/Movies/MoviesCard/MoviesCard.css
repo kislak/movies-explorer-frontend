@@ -42,15 +42,56 @@
   color: #A0A0A0;
 }
 
+.movies-card__picture {
+  position: relative;
+}
+
+.movies-card__button {
+  position: absolute;
+  border-radius: 15px;
+  border:none;
+  top: 14px;
+  right: 14px;
+  margin: 0;
+
+  font-family: Inter;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 9px;
+  letter-spacing: 0px;
+  text-align: center;
+}
+
+.movies-card__button_save {
+  padding: 6px 7px;
+}
+
+.movies-card__button_check {
+  width: 21px;
+  height: 21px;
+  background-image: url("../../../images/card-check.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  border: none;
+}
+
+.movies-card__button_delete {
+  width: 21px;
+  height: 21px;
+  background-image: url("../../../images/card-cross.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  border: none;
+}
+
+
 @media (max-width: 560px) {
   .movies-card__img {
     margin: 0px;
     padding: 0px;
     width: 300px;
     height: 168px;
-  }
-  .movies-card {
-    /*max-width: 300px;*/
   }
   .movies-card__details {
     margin: 10px;

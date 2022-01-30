@@ -10,7 +10,7 @@ function Movies(props) {
     <div className="movies">
       <Header/>
       <SearchForm/>
-      <MoviesCardList/>
+      <MoviesCardList showMore={true}/>
       <Preloader/>
       <Footer/>
     </div>
