@@ -5,7 +5,6 @@
 
 .not-found__code {
   margin: 246px auto 0;
-  font-family: Inter;
   font-size: 140px;
   font-style: normal;
   font-weight: 400;
@@ -16,7 +15,6 @@
 
 .not-found__details{
   margin: 5px auto;
-  font-family: Inter;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -27,7 +25,6 @@
 
 .not-found__back {
   margin-top: 184px;
-  font-family: Inter;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -48,7 +45,6 @@
 @media (max-width: 1280px) {
   .not-found__code {
     margin-top: 329px;
-    font-family: Inter;
     font-size: 80px;
     font-style: normal;
     font-weight: 400;

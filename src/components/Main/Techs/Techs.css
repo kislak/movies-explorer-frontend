@@ -9,7 +9,6 @@
 }
 
 .techs__title {
-  font-family: Inter;
   font-style: normal;
   font-weight: normal;
   font-size: 22px;
@@ -27,7 +26,6 @@
 
 .techs__title-about {
   margin: 90px auto 20px;
-  font-family: Inter;
   font-size: 50px;
   font-style: normal;
   font-weight: 400;
@@ -37,7 +35,6 @@
 }
 
 .techs__text {
-  font-family: Inter;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -83,7 +80,6 @@
   .techs__list-item {
     min-width: 84px;
     min-height: 57px;
-    font-family: Inter;
     font-size: 12px;
     font-style: normal;
     font-weight: 400;

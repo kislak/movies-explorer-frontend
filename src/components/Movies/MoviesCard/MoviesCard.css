@@ -22,7 +22,6 @@
 }
 
 .movies-card__title {
-  font-family: Inter;
   font-size: 13px;
   font-style: normal;
   font-weight: 500;
@@ -32,7 +31,6 @@
 }
 
 .movies-card__time {
-  font-family: Inter;
   font-size: 11px;
   font-style: normal;
   font-weight: 400;
@@ -54,7 +52,6 @@
   right: 14px;
   margin: 0;
 
-  font-family: Inter;
   font-size: 10px;
   font-style: normal;
   font-weight: 400;
