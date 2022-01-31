@@ -1,0 +1,135 @@
+.register {
+  max-width: 400px;
+  margin: 0px auto;
+  padding-top: 70px;
+}
+
+.register__container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  max-width: 396px;
+  margin: auto;
+}
+
+.register__fields {
+  min-height: 270px;
+  margin-bottom: 70px;
+}
+
+.register__title {
+  margin-top: 20px;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 29px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.register__input {
+  margin: 5px auto 24px;
+  width: 396px;
+  color: #000000;
+  border: none;
+  border-bottom: 1px #E8E8E8 solid;
+  padding: 10px;
+
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.register__input:last-child {
+  border-bottom: none;
+}
+
+.register__input_error {
+  color: #EE3465;
+}
+
+.register__input-label {
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 12px;
+  letter-spacing: 0em;
+  text-align: left;
+  display: block;
+}
+
+.register__error-text {
+  font-size: 10px;
+  margin: 0;
+  padding: 0;
+  color: #EE3465;
+}
+
+.register__submit {
+  width: 396px;
+  height: 45px;
+  background: #3456F3;
+  border: none;
+  border-radius: 3px;
+  color: white;
+  margin: 70px auto 0;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: center;
+}
+
+.register__submit:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+.register__ref {
+  margin-top: 30px;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: center;
+  color: #A0A0A0
+}
+
+.register__link {
+  text-decoration: none;
+  color: #3456F3
+}
+
+.register__link:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+@media (max-width: 1280px) {
+  .register {
+    padding: 236px 30px;
+  }
+}
+
+@media (max-width: 560px) {
+  .register {
+    padding: 30px 30px 0;
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .register__input {
+    width: 260px;
+  }
+  .register__submit {
+    width: 260px;
+  }
+}
