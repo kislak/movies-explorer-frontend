@@ -14,6 +14,7 @@ import Login from '../Login/Login.js'
 import Profile from '../Profile/Profile.js'
 import NotFound from '../NotFound/NotFound.js'
 import moviesApi from "../../utils/MoviesApi";
+import mainApi from "../../utils/MainApi";
 
 function App(props) {
   const [allMovies, setAllMovies] = React.useState('');
@@ -31,6 +32,23 @@ function App(props) {
     // });
   }, []);
 
+
+  const registerHandler = (name, email, password) => {
+    mainApi.signUp(name, email, password).then((res) => {
+      // this.setState({
+      //   isInfoTooltipPopupOpen: true,
+      //   isSuccessfulAuth: true
+      // })
+      console.log(res);
+    }).catch((err) => {
+      // this.setState({
+      //   isInfoTooltipPopupOpen: true,
+      //   isSuccessfulAuth: false
+      // })
+      console.log(err);
+    })
+  }
+
   return (
     <BrowserRouter>
       <Routes>
@@ -40,7 +58,7 @@ function App(props) {
         </Route>
         <Route path="/saved-movies" element={<SavedMovies/>}>
         </Route>
-        <Route path="/signup" element={<Register/>}>
+        <Route path="/signup" element={<Register registerHandler={registerHandler} />}>
         </Route>
         <Route path="/signin" element={<Login/>}>
         </Route>

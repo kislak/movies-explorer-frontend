@@ -4,6 +4,16 @@ import {useNavigate} from "react-router-dom";
 
 function Register(props) {
   const navigate = useNavigate();
+
+  const [name, setName] = React.useState('')
+  const [email, setEmail] = React.useState('')
+  const [password, setPassword] = React.useState('')
+
+  const submitForm = (e) => {
+    e.preventDefault()
+    props.registerHandler(name, email, password)
+  }
+
   return (
     <section className="register">
       <Header logoOnly={true} />
@@ -12,7 +22,7 @@ function Register(props) {
           Добро пожаловать!
         </h1>
 
-        <form className="register__form" name="register">
+        <form className="register__form" name="register" onSubmit={submitForm}>
           <section className="register__fields">
           <label
             htmlFor="register__input-name"
@@ -28,6 +38,8 @@ function Register(props) {
             name="name"
             autoComplete="off"
             required
+            onChange={(e) => setName(e.currentTarget.value)}
+            value={name}
           />
 
           <label
@@ -44,6 +56,8 @@ function Register(props) {
             name="email"
             autoComplete="off"
             required
+            onChange={(e) => setEmail(e.currentTarget.value)}
+            value={email}
           />
 
           <label
@@ -60,6 +74,8 @@ function Register(props) {
             name="password"
             autoComplete="off"
             required
+            onChange={(e) => setPassword(e.currentTarget.value)}
+            value={password}
           />
           <p className="register__error-text">
             Что-то пошло не так...

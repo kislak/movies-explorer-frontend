@@ -1,17 +1,10 @@
 import config from "../config.js"
 
 class MoviesApi {
-    // constructor({baseUrl, headers}) {
-    //     this._baseUrl = baseUrl;
-    //     this._headers = headers;
-    // }
-
-    getAllFilms() {
+    getAllMovies() {
         return fetch("http://api.nomoreparties.co/beatfilm-movies",  {
-            mode: 'cors',
             headers: {
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': 'http://localhost:3000'
             }
         }).then(res => this._getResponseData(res));
     }
@@ -31,7 +24,7 @@ class MoviesApi {
 }
 
 const moviesApi = new MoviesApi({
-    baseUrl: config.baseUrl,
+    baseUrl: config.moviesUrl,
 
 });
 

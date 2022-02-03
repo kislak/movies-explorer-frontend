@@ -10,14 +10,14 @@ function Profile(props) {
       </h1>
 
       <section className="profile__details">
-        <secction className="profile__detail">
+        <section className="profile__detail">
           <p className="profile__details-title">
             Имя
           </p>
           <p className="profile__details-item">
             Виталий
           </p>
-        </secction>
+        </section>
         <secction className="profile__detail">
           <p className="profile__details-title">
             E-mail
