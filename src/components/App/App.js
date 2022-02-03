@@ -13,8 +13,24 @@ import Register from '../Register/Register.js'
 import Login from '../Login/Login.js'
 import Profile from '../Profile/Profile.js'
 import NotFound from '../NotFound/NotFound.js'
+import moviesApi from "../../utils/MoviesApi";
 
 function App(props) {
+  const [allMovies, setAllMovies] = React.useState('');
+
+  React.useEffect(() => {
+    //cors issue for localhost:3000 - probably https
+    setAllMovies(moviesApi.allMovies());
+    console.log(moviesApi.allMovies())
+
+    // api.getAllFilms().then((films) => {
+    //   console.log(films)
+    //
+    // }).catch((err) => {
+    //   console.log(err);
+    // });
+  }, []);
+
   return (
     <BrowserRouter>
       <Routes>
