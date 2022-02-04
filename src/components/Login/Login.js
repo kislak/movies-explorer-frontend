@@ -4,6 +4,15 @@ import {useNavigate} from "react-router-dom";
 
 function Login(props) {
   const navigate = useNavigate();
+
+  const [email, setEmail] = React.useState('')
+  const [password, setPassword] = React.useState('')
+
+  const submitForm = (e) => {
+    e.preventDefault();
+    props.loginHandler(email, password)
+  }
+
   return (
     <section className="login">
       <Header logoOnly={true} />
@@ -12,7 +21,7 @@ function Login(props) {
           Рады видеть!
         </h1>
 
-        <form className="login__form" name="login">
+        <form className="login__form" name="login" onSubmit={submitForm}>
           <section className="login__fields">
             <label
               htmlFor="login__input-name"
@@ -28,6 +37,8 @@ function Login(props) {
               name="email"
               autoComplete="off"
               required
+              onChange={(e) => setEmail(e.currentTarget.value)}
+              value={email}
             />
 
             <label
@@ -44,6 +55,8 @@ function Login(props) {
               name="password"
               autoComplete="off"
               required
+              onChange={(e) => setPassword(e.currentTarget.value)}
+              value={password}
             />
           </section>
           <button className="login__submit" type="submit">

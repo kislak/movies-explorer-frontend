@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from "react-router-dom/index";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function Navigation(props) {
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const loggedin = ["/movies", "/saved-movies", "/profile"].includes(pathname)
+
+  const currentUser = React.useContext(CurrentUserContext);
+
+  // const loggedin = () => {
+  //   return localStorage.getItem("loggedin") === 1
+  // }
   const [isOpen, setIsOpen] = useState(false);
 
   const nav = <>
@@ -108,7 +114,7 @@ function Navigation(props) {
 
   return (
     <>
-      {loggedin ? nav : loginNav}
+      {currentUser ? nav : loginNav}
     </>
   )
 }

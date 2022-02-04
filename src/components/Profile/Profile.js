@@ -1,12 +1,15 @@
 import React from "react";
 import Header from "../Header/Header";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext.js"
 
 function Profile(props) {
+  const currentUser = React.useContext(CurrentUserContext);
+
   return (
     <section className="profile">
       <Header/>
       <h1 className="profile__welcome">
-        Привет, Виталий!
+        {`Привет, ${currentUser.name}!`}
       </h1>
 
       <section className="profile__details">
@@ -15,24 +18,24 @@ function Profile(props) {
             Имя
           </p>
           <p className="profile__details-item">
-            Виталий
+            {currentUser.name}
           </p>
         </section>
-        <secction className="profile__detail">
+        <section className="profile__detail">
           <p className="profile__details-title">
             E-mail
           </p>
           <p className="profile__details-item">
-            pochta@yandex.ru
+            {currentUser.email}
           </p>
-        </secction>
+        </section>
       </section>
 
       <nav className="profile__links" >
         <a className="profile__link" href="#">
           Редактировать
         </a>
-        <a className="profile__link profile__link_red" href="#">
+        <a className="profile__link profile__link_red" href="#" onClick={props.logoutHandler}>
           Выйти из аккаунта
         </a>
       </nav>

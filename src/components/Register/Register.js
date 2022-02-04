@@ -10,7 +10,7 @@ function Register(props) {
   const [password, setPassword] = React.useState('')
 
   const submitForm = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     props.registerHandler(name, email, password)
   }
 
