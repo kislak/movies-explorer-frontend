@@ -6,9 +6,15 @@ import MoviesCardList from "./MoviesCardList/MoviesCardList";
 import Preloader from "./Preloader/Preloader";
 
 function Movies(props) {
-  const movies = props.movies
+  const [loading, setLoading] = React.useState(false)
 
   const searchHandler = (text, shortFlag) => {
+    setLoading(true)
+
+    props.fetchMovies()
+
+    setLoading(false)
+
     console.log(text)
     console.log(shortFlag)
   }
@@ -18,8 +24,12 @@ function Movies(props) {
     <div className="movies">
       <Header/>
       <SearchForm searchHandler={searchHandler} />
-      <MoviesCardList movies={movies} showMore={true}/>
-      <Preloader/>
+      {!loading &&
+        <MoviesCardList movies={props.movies} showMore={true}/>
+      }
+      {loading &&
+        <Preloader/>
+      }
       <Footer/>
     </div>
   )

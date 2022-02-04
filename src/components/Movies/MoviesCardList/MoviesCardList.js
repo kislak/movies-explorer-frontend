@@ -2,42 +2,28 @@ import React from "react";
 import MoviesCard from "../MoviesCard/MoviesCard";
 
 function MoviesCardList(props) {
+
+  const slice =  ((window.innerWidth < 1280) ? 2 : 3)
+  const movies = props.movies.slice(0, slice)
+
+  console.log(movies)
+  const cards = movies.map((item) => (
+    <MoviesCard
+      key={item.id}
+      title={item.nameRU}
+      time={item.duration}
+      url={`https://api.nomoreparties.co${item.image.url}`}
+      tube={item.trailerLink}
+      saved="true"
+      showCheck={true}
+    />
+  ));
+
   return (
     <section className="movies-card-list">
       <section className="movies-card-list__items">
-        <MoviesCard
-          title="33 слова о дизайне"
-          time="1ч 17м"
-          url="https://ms1.relax.by/images/d4b21593f3f04b3b118e37d5e68927ff/thumb/w%3D400%2Ch%3D600%2Cq%3D90/afisha_event_photo/5c/4c/97/5c4c974d0c47e0866ae8af7e34ee1d47.jpg"
-          saved="true"
-          showCheck={true}
-        />
-        <MoviesCard
-          title="33 слова о дизайне"
-          time="1ч 17м"
-          url="https://ms1.relax.by/images/d4b21593f3f04b3b118e37d5e68927ff/thumb/w%3D400%2Ch%3D600%2Cq%3D90/afisha_event_photo/5c/4c/97/5c4c974d0c47e0866ae8af7e34ee1d47.jpg"
-          saved="false"
-          showDelete={true}
-        />
-        <MoviesCard
-          title="33 слова о дизайне"
-          time="1ч 17м"
-          url="https://ms1.relax.by/images/d4b21593f3f04b3b118e37d5e68927ff/thumb/w%3D400%2Ch%3D600%2Cq%3D90/afisha_event_photo/5c/4c/97/5c4c974d0c47e0866ae8af7e34ee1d47.jpg"
-          saved="false"
-          showSave={true}
-        />
-        <MoviesCard
-          title="33 слова о дизайне"
-          time="1ч 17м"
-          url="https://ms1.relax.by/images/d4b21593f3f04b3b118e37d5e68927ff/thumb/w%3D400%2Ch%3D600%2Cq%3D90/afisha_event_photo/5c/4c/97/5c4c974d0c47e0866ae8af7e34ee1d47.jpg"
-          saved="false"
-        />
-        <MoviesCard
-          title="33 слова о дизайне"
-          time="1ч 17м"
-          url="https://ms1.relax.by/images/d4b21593f3f04b3b118e37d5e68927ff/thumb/w%3D400%2Ch%3D600%2Cq%3D90/afisha_event_photo/5c/4c/97/5c4c974d0c47e0866ae8af7e34ee1d47.jpg"
-          saved="false"
-        />
+        { cards.length === 0 &&  <p>Ничего не найдено</p> }
+        {cards}
       </section>
 
       { props.showMore &&

@@ -2,12 +2,13 @@ import React from "react";
 function MoviesCard(props) {
   return (
     <section className="movies-card">
-      <section className="movies-card__picture">
-        <img
+      <section className="movies-card__picture" >
+        <img onClick={()=> window.open(props.tube, "_blank")}
           className="movies-card__img"
           alt="постер фильма"
           src={props.url}
-        />
+          >
+        </img>
 
         {props.showSave &&
         <button className="movies-card__button movies-card__button_save"

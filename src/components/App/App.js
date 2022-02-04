@@ -20,7 +20,7 @@ import ProtectedRouteElement from "../ProtectedRouteElement";
 
 function App(props) {
   const navigate = useNavigate();
-  const [allMovies, setAllMovies] = React.useState({});
+  const [movies, setMovies] = React.useState([]);
   const [currentUser, setCurrentUser] = React.useState({});
 
   const fetchUserData = () => {
@@ -32,7 +32,7 @@ function App(props) {
   }
 
   const fetchMovies = () => {
-    setAllMovies(moviesApi.allMovies());
+    setMovies(moviesApi.allMovies());
   }
 
   React.useEffect(() => {
@@ -88,7 +88,7 @@ function App(props) {
         } />
         <Route path="/movies" element={
           <ProtectedRouteElement>
-            <Movies movies={allMovies}/>
+            <Movies fetchMovies={fetchMovies} movies={movies}/>
           </ProtectedRouteElement>
         } />
         <Route path="/saved-movies" element={
