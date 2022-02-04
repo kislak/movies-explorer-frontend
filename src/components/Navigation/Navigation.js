@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from "react-router-dom/index";
-import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function Navigation(props) {
   const navigate = useNavigate();
-  const { pathname } = useLocation();
-
-  const currentUser = React.useContext(CurrentUserContext);
-
-  // const loggedin = () => {
-  //   return localStorage.getItem("loggedin") === 1
-  // }
   const [isOpen, setIsOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  React.useEffect(() => {
+    setIsLoggedIn(localStorage.getItem("loggedin") === '1')
+  }, []);
+
 
   const nav = <>
     <nav className="navigation navigation__desktop">
@@ -114,7 +112,7 @@ function Navigation(props) {
 
   return (
     <>
-      {currentUser ? nav : loginNav}
+      {isLoggedIn ? nav : loginNav}
     </>
   )
 }

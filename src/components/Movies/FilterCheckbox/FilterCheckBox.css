@@ -18,8 +18,13 @@
   justify-content: flex-end
 }
 
+.filter-check-box__container:hover {
+  cursor: pointer;
+}
+
 .filter-check-box__container_off {
-  background: #343434 ;
+  background: #343434;
+  justify-content: flex-start
 }
 
 .filter-check-box__circle {

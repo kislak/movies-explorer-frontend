@@ -16,36 +16,38 @@ import moviesApi from "../../utils/MoviesApi";
 import mainApi from "../../utils/MainApi";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext.js"
 import { useNavigate } from "react-router-dom/index";
-
+import ProtectedRouteElement from "../ProtectedRouteElement";
 
 function App(props) {
   const navigate = useNavigate();
-  const [allMovies, setAllMovies] = React.useState('');
-  const [currentUser, setCurrentUser] = React.useState('');
+  const [allMovies, setAllMovies] = React.useState({});
+  const [currentUser, setCurrentUser] = React.useState({});
 
-  React.useEffect(() => {
-    //cors issue for localhost:3000 - probably https
-    setAllMovies(moviesApi.allMovies());
-    console.log(moviesApi.allMovies())
-
+  const fetchUserData = () => {
     mainApi.getUser().then((user) => {
       setCurrentUser(user)
     }).catch((err) => {
       console.log(err);
     })
+  }
 
-    // api.getAllFilms().then((films) => {
-    //   console.log(films)
-    //
-    // }).catch((err) => {
-    //   console.log(err);
-    // });
-  }, []);
+  const fetchMovies = () => {
+    setAllMovies(moviesApi.allMovies());
+  }
 
+  React.useEffect(() => {
+    fetchMovies()
+
+    if (currentUser) {
+      fetchUserData()
+    }
+  },[]);
 
   const registerHandler = (name, email, password) => {
     mainApi.signUp(name, email, password).then((res) => {
-      localStorage.setItem("loggedin", 1)
+      localStorage.setItem("loggedin", '1')
+      fetchUserData()
+
       navigate('/movies')
     }).catch((err) => {
       console.log(err);
@@ -54,7 +56,9 @@ function App(props) {
 
   const loginHandler = (email, password) => {
     mainApi.signIn(email, password).then((res) => {
-      localStorage.setItem("loggedin", 1)
+      localStorage.setItem("loggedin", '1')
+      fetchUserData()
+
       navigate('/movies')
     }).catch((err) => {
       console.log(err);
@@ -63,24 +67,35 @@ function App(props) {
 
   const logoutHandler = () => {
     mainApi.signOut().then((res) => {
-      localStorage.setItem("loggedin", 0)
+      localStorage.setItem("loggedin", '0')
       navigate('/')
-      console.log(res);
+      setCurrentUser({})
     }).catch((err) => {
       console.log(err);
     })
   }
 
-
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <Routes>
         <Route path="/" element={<Main/>} />
-        <Route path="/movies" element={<Movies/>} />
-        <Route path="/saved-movies" element={<SavedMovies/>} />
         <Route path="/signup" element={<Register registerHandler={registerHandler} />} />
         <Route path="/signin" element={<Login loginHandler={loginHandler} />} />
-        <Route path="/profile" element={<Profile logoutHandler={logoutHandler}/>} />
+        <Route path="/profile" element={
+          <ProtectedRouteElement>
+            <Profile logoutHandler={logoutHandler}/>
+          </ProtectedRouteElement>
+        } />
+        <Route path="/movies" element={
+          <ProtectedRouteElement>
+            <Movies movies={allMovies}/>
+          </ProtectedRouteElement>
+        } />
+        <Route path="/saved-movies" element={
+          <ProtectedRouteElement>
+            <SavedMovies/>
+          </ProtectedRouteElement>
+        } />
         <Route path="*" element={<NotFound/>} />
       </Routes>
     </CurrentUserContext.Provider>

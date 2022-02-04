@@ -6,11 +6,19 @@ import MoviesCardList from "./MoviesCardList/MoviesCardList";
 import Preloader from "./Preloader/Preloader";
 
 function Movies(props) {
+  const movies = props.movies
+
+  const searchHandler = (text, shortFlag) => {
+    console.log(text)
+    console.log(shortFlag)
+  }
+
+
   return (
     <div className="movies">
       <Header/>
-      <SearchForm/>
-      <MoviesCardList showMore={true}/>
+      <SearchForm searchHandler={searchHandler} />
+      <MoviesCardList movies={movies} showMore={true}/>
       <Preloader/>
       <Footer/>
     </div>
