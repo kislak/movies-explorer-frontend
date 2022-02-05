@@ -21,7 +21,7 @@ import ProtectedRouteElement from "../ProtectedRouteElement";
 function App(props) {
   const navigate = useNavigate();
   const [movies, setMovies] = React.useState([]);
-  const [savedMovies, setSavedMovies] = React.useState([]);
+  const [userMovies, setUserMovies] = React.useState([]);
   const [currentUser, setCurrentUser] = React.useState({});
 
   const fetchUserData = () => {
@@ -32,15 +32,18 @@ function App(props) {
     })
   }
 
-  const fetchMovies = () => {
-    return moviesApi.allMovies()
+  const fetchUserMovies = () => {
+    mainApi.getMovies().then((movies) => {
+      setUserMovies(movies)
+    }).catch((err) => {
+      console.log(err);
+      return []
+    })
   }
 
-  React.useEffect(() => {
-    if (localStorage.getItem("loggedin", '1')) {
-      fetchUserData()
-    }
-  },[]);
+  const fetchMovies = () => {
+    setMovies(moviesApi.allMovies());
+  }
 
   const registerHandler = (name, email, password) => {
     mainApi.signUp(name, email, password).then((res) => {
@@ -74,6 +77,14 @@ function App(props) {
     })
   }
 
+  React.useEffect(() => {
+    if (localStorage.getItem("loggedin", '1')) {
+      fetchUserData()
+      fetchUserMovies()
+    }
+    fetchMovies()
+  },[]);
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <Routes>
@@ -87,12 +98,12 @@ function App(props) {
         } />
         <Route path="/movies" element={
           <ProtectedRouteElement>
-            <Movies fetchMovies={fetchMovies}/>
+            <Movies fetchMovies={fetchMovies} movies={movies} userMovies={userMovies}/>
           </ProtectedRouteElement>
         } />
         <Route path="/saved-movies" element={
           <ProtectedRouteElement>
-            <SavedMovies fetchMovies={fetchMovies} savedMovies={savedMovies}/>
+            <SavedMovies fetchMovies={fetchMovies}/>
           </ProtectedRouteElement>
         } />
         <Route path="*" element={<NotFound/>} />

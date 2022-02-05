@@ -13,7 +13,7 @@ function SavedMovies(props) {
     <div className="movies saved-movies">
       <Header/>
       <SearchForm searchHandler={searchHandler} />
-      <MoviesCardList movies={props.savedMovies} showAll={true}/>
+      <MoviesCardList movies={props.movies} showAll={true}/>
       <Footer/>
     </div>
   )

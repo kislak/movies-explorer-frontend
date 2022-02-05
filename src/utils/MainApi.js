@@ -63,7 +63,6 @@ class MainApi {
             credentials: "include",
             headers: {
                 "Content-Type": "application/json",
-                // "Authorization" : `Bearer ${localStorage.getItem("AuthToken")}`
             },
             body: JSON.stringify(
               {
@@ -80,30 +79,28 @@ class MainApi {
             credentials: "include",
             headers: {
                 "Content-Type": "application/json",
-                // "Authorization" : `Bearer ${localStorage.getItem("AuthToken")}`
             }
         }).then(res => this._getResponseData(res));
     }
 
-    createMovie(
+    createMovie(item) {
+      const {
         country,
         director,
         duration,
         year,
         description,
-        image,
-        trailer,
-        thumbnail,
-        movieId,
         nameRU,
-        nameEN
-    ){
-        return fetch(`${this._baseUrl}/users/me`, {
-            method: "GET",
+        nameEN,
+        trailerLink,
+        image
+      } = item
+
+      return fetch(`${this._baseUrl}/movies`, {
+            method: "POST",
             credentials: "include",
             headers: {
                 "Content-Type": "application/json",
-                // "Authorization" : `Bearer ${localStorage.getItem("AuthToken")}`
             },
             body: JSON.stringify(
               {
@@ -112,12 +109,12 @@ class MainApi {
                   duration,
                   year,
                   description,
-                  image,
-                  trailer,
-                  thumbnail,
-                  movieId,
                   nameRU,
-                  nameEN
+                  nameEN,
+                  movieId: item.id,
+                  image: `https://api.nomoreparties.co${image.url}`,
+                  trailer: trailerLink,
+                  thumbnail: `https://api.nomoreparties.co${image.formats.thumbnail.url}`,
               }),
         }).then(res => this._getResponseData(res));
     }
@@ -128,7 +125,6 @@ class MainApi {
             credentials: "include",
             headers: {
                 "Content-Type": "application/json",
-                // "Authorization" : `Bearer ${localStorage.getItem("AuthToken")}`
             }
         }).then(res => this._getResponseData(res));
     }

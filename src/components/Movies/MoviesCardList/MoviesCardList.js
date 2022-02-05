@@ -19,12 +19,14 @@ function MoviesCardList(props) {
   const cards = moviesToShow().map((item) => (
     <MoviesCard
       key={item.id}
-      title={item.nameRU}
-      time={item.duration}
-      url={`https://api.nomoreparties.co${item.image.url}`}
-      tube={item.trailerLink}
-      saved="true"
-      showCheck={true}
+      item={item}
+      // title={item.nameRU}
+      // time={item.duration}
+      // url={`https://api.nomoreparties.co${item.image.url}`}
+      // saved={true}
+      // showCheck={true}
+      saveHandler={props.saveHandler}
+      deleteHandler={props.deleteHandler}
     />
   ));
 
