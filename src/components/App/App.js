@@ -103,7 +103,7 @@ function App(props) {
         } />
         <Route path="/saved-movies" element={
           <ProtectedRouteElement>
-            <SavedMovies fetchMovies={fetchMovies}/>
+            <SavedMovies fetchMovies={fetchMovies} movies={movies} userMovies={userMovies}/>
           </ProtectedRouteElement>
         } />
         <Route path="*" element={<NotFound/>} />

@@ -8,23 +8,22 @@ function MoviesCardList(props) {
     return props.rows * moviesInRow
   }
 
-  const isAllShown = () => {
+  const areAllShown = () => {
     return showNumber() >= movies.length
   }
 
   const moviesToShow = () => {
-    return isAllShown() ? movies : movies.slice(0, showNumber())
+    if (props.showAll) {
+      return movies
+    }
+
+    return areAllShown() ? movies : movies.slice(0, showNumber())
   }
 
   const cards = moviesToShow().map((item) => (
     <MoviesCard
       key={item.id}
       item={item}
-      // title={item.nameRU}
-      // time={item.duration}
-      // url={`https://api.nomoreparties.co${item.image.url}`}
-      // saved={true}
-      // showCheck={true}
       saveHandler={props.saveHandler}
       deleteHandler={props.deleteHandler}
     />
@@ -45,7 +44,7 @@ function MoviesCardList(props) {
         {cards}
       </section>
 
-      { !props.showAll && !isAllShown() &&
+      { !props.showAll && !areAllShown() &&
         <section className="movies-card-list__actions">
           <button
             type="button"

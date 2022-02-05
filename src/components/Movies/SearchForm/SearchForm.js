@@ -8,7 +8,6 @@ function SearchForm(props) {
   const submitForm = (e) => {
     e.preventDefault()
 
-
     if (text.length >= 1) {
       setShowError(false)
       props.searchHandler(text, short)
