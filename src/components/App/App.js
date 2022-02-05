@@ -23,6 +23,44 @@ function App(props) {
   const [movies, setMovies] = React.useState([]);
   const [userMovies, setUserMovies] = React.useState([]);
   const [currentUser, setCurrentUser] = React.useState({});
+  const [filteredMovies, setFilteredMovies] = React.useState([])
+  const SHORT_DURATION = 40
+
+  const searchHandler = (text, shortFlag) => {
+    const result = movies.filter((item) => {
+      if (shortFlag && item.duration > SHORT_DURATION) {
+        return false
+      }
+      return (
+        (item.nameRU && item.nameRU.toUpperCase().includes(text.toUpperCase())) ||
+        (item.nameEN && item.nameEN.toUpperCase().includes(text.toUpperCase()))
+      )
+    })
+
+    setFilteredMovies(result)
+  }
+
+  const saveHandler = (item) => {
+    console.log(item)
+    mainApi.createMovie(item).then((res) => {
+      console.log(res)
+      item.main_id = res._id
+
+      setFilteredMovies(filteredMovies.map(old => old.id === item.id ? item : old))
+    }).catch((err) => {
+      console.log(err);
+    })
+  }
+
+  const deleteHandler = (item) => {
+    mainApi.deleteMovie(item.main_id).then((res) => {
+      console.log(res)
+      item.main_id = undefined;
+      setFilteredMovies(filteredMovies.map(i => i.id === item.id ? item : i))
+    }).catch((err) => {
+      console.log(err);
+    })
+  }
 
   const fetchUserData = () => {
     mainApi.getUser().then((user) => {
@@ -98,7 +136,14 @@ function App(props) {
         } />
         <Route path="/movies" element={
           <ProtectedRouteElement>
-            <Movies fetchMovies={fetchMovies} movies={movies} userMovies={userMovies}/>
+            <Movies
+              fetchMovies={fetchMovies}
+              filteredMovies={filteredMovies}
+              userMovies={userMovies}
+              searchHandler={searchHandler}
+              saveHandler={saveHandler}
+              deleteHandler={deleteHandler}
+            />
           </ProtectedRouteElement>
         } />
         <Route path="/saved-movies" element={

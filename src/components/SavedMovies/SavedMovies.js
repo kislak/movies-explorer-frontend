@@ -7,12 +7,13 @@ import mainApi from "../../utils/MainApi";
 
 function SavedMovies(props) {
   const SHORT_DURATION = 40
+  const [isSearchTriggered, setIsSearchTriggered] = React.useState(false)
   const [filteredMovies, setFilteredMovies] = React.useState([])
   const [movies, setMovies] = React.useState([])
 
   React.useEffect(() => {
     const moviesWithRefs = props.movies.map((movie) => {
-      let userMovie = props.userMovies.find((userMovie) => userMovie.movieId == movie.id)
+      let userMovie = props.userMovies.find((userMovie) => userMovie.movieId === movie.id)
       movie.main_id = (userMovie && userMovie._id)
       return movie
     }).filter((movie) => { return movie.main_id  })
@@ -39,6 +40,7 @@ function SavedMovies(props) {
   }
 
   const searchHandler = (text, shortFlag) => {
+    setIsSearchTriggered(true)
     setFilteredMovies(getFliteredMovies(text, shortFlag))
   }
 
@@ -46,7 +48,9 @@ function SavedMovies(props) {
     mainApi.deleteMovie(item.main_id).then((res) => {
       console.log(res)
       item.main_id = undefined;
-      setFilteredMovies(filteredMovies.map(i => i.id === item.id ? item : i))
+
+      setMovies(movies.filter(i => i.id === item.id ? item : i))
+      setFilteredMovies(filteredMovies.filter(i => i.id !== item.id ))
     }).catch((err) => {
       console.log(err);
     })
@@ -59,7 +63,7 @@ function SavedMovies(props) {
       <MoviesCardList
         movies={filteredMovies}
         showAll={true}
-        isSearchTriggered={true}
+        isSearchTriggered={isSearchTriggered}
         deleteHandler={deleteHandler}
       />
       <Footer/>

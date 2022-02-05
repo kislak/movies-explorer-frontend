@@ -3,6 +3,7 @@ import MoviesCard from "../MoviesCard/MoviesCard";
 
 function MoviesCardList(props) {
   let movies = props.movies
+
   const showNumber = () => {
     const moviesInRow = ((window.innerWidth < 1280) ? 2 : 3)
     return props.rows * moviesInRow
