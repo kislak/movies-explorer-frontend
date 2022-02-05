@@ -40,6 +40,8 @@ function App(props) {
     setFilteredMovies(result)
   }
 
+
+
   const saveHandler = (item) => {
     console.log(item)
     mainApi.createMovie(item).then((res) => {
@@ -79,10 +81,6 @@ function App(props) {
     })
   }
 
-  const fetchMovies = () => {
-    setMovies(moviesApi.allMovies());
-  }
-
   const registerHandler = (name, email, password) => {
     mainApi.signUp(name, email, password).then((res) => {
       localStorage.setItem("loggedin", '1')
@@ -120,7 +118,7 @@ function App(props) {
       fetchUserData()
       fetchUserMovies()
     }
-    fetchMovies()
+    setMovies(moviesApi.allMovies());
   },[]);
 
   return (
@@ -137,7 +135,6 @@ function App(props) {
         <Route path="/movies" element={
           <ProtectedRouteElement>
             <Movies
-              fetchMovies={fetchMovies}
               filteredMovies={filteredMovies}
               userMovies={userMovies}
               searchHandler={searchHandler}
@@ -148,7 +145,11 @@ function App(props) {
         } />
         <Route path="/saved-movies" element={
           <ProtectedRouteElement>
-            <SavedMovies fetchMovies={fetchMovies} movies={movies} userMovies={userMovies}/>
+            <SavedMovies
+              movies={movies}
+              userMovies={userMovies}
+
+            />
           </ProtectedRouteElement>
         } />
         <Route path="*" element={<NotFound/>} />
