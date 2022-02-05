@@ -8,6 +8,7 @@ function MoviesCard(props) {
           alt="постер фильма"
           src={props.url}
           >
+
         </img>
 
         {props.showSave &&

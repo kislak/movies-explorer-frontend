@@ -4,6 +4,13 @@
   max-width: 360px;
 }
 
+.movies-card__picture:hover .movies-card__img{
+  cursor: pointer;
+  transform: scale(1.1);
+  transition: all 0.8s ease-in-out;
+  overflow: hidden;
+}
+
 .movies-card__img {
   width: 339px;
   object-fit: cover;
@@ -61,7 +68,7 @@
 }
 
 .movies-card__button:hover {
-  opacity: 0.7;
+  opacity: 0.8;
   cursor: pointer;
 }
 

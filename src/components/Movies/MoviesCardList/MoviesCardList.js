@@ -2,11 +2,13 @@ import React from "react";
 import MoviesCard from "../MoviesCard/MoviesCard";
 
 function MoviesCardList(props) {
+  let movies = props.movies
 
-  const slice =  ((window.innerWidth < 1280) ? 2 : 3)
-  const movies = props.movies.slice(0, slice)
+  if (!props.showAll) {
+    const slice = (window.innerWidth < 1280) ? 2 : 3
+    movies = movies.slice(0, slice)
+  }
 
-  console.log(movies)
   const cards = movies.map((item) => (
     <MoviesCard
       key={item.id}
@@ -26,7 +28,7 @@ function MoviesCardList(props) {
         {cards}
       </section>
 
-      { props.showMore &&
+      { !props.showAll &&
         <section className="movies-card-list__actions">
           <button type="button" className="movies-card-list__more">
             Ещё

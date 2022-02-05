@@ -25,7 +25,7 @@ function Movies(props) {
       <Header/>
       <SearchForm searchHandler={searchHandler} />
       {!loading &&
-        <MoviesCardList movies={props.movies} showMore={true}/>
+        <MoviesCardList movies={props.movies} showAll={false}/>
       }
       {loading &&
         <Preloader/>

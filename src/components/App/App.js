@@ -21,6 +21,7 @@ import ProtectedRouteElement from "../ProtectedRouteElement";
 function App(props) {
   const navigate = useNavigate();
   const [movies, setMovies] = React.useState([]);
+  const [savedMovies, setSavedMovies] = React.useState([]);
   const [currentUser, setCurrentUser] = React.useState({});
 
   const fetchUserData = () => {
@@ -32,7 +33,9 @@ function App(props) {
   }
 
   const fetchMovies = () => {
-    setMovies(moviesApi.allMovies());
+    const mv = moviesApi.allMovies()
+    setMovies(mv);
+    setSavedMovies(mv.slice(4,10));
   }
 
   React.useEffect(() => {
@@ -93,7 +96,7 @@ function App(props) {
         } />
         <Route path="/saved-movies" element={
           <ProtectedRouteElement>
-            <SavedMovies/>
+            <SavedMovies fetchMovies={fetchMovies} savedMovies={savedMovies}/>
           </ProtectedRouteElement>
         } />
         <Route path="*" element={<NotFound/>} />
