@@ -20,11 +20,14 @@ function MoviesCardList(props) {
       showCheck={true}
     />
   ));
+  const nothingFound = () => {
+    return props.isSearchTriggered && cards.length === 0
+  }
 
   return (
     <section className="movies-card-list">
       <section className="movies-card-list__items">
-        { cards.length === 0 &&  <p>Ничего не найдено</p> }
+        { nothingFound() && <p>Ничего не найдено</p> }
         {cards}
       </section>
 

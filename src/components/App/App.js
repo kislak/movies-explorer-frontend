@@ -33,15 +33,14 @@ function App(props) {
   }
 
   const fetchMovies = () => {
-    const mv = moviesApi.allMovies()
-    setMovies(mv);
-    setSavedMovies(mv.slice(4,10));
+    return moviesApi.allMovies()
+    // const mv = moviesApi.allMovies()
+    // setMovies(mv);
+    // setSavedMovies(mv.slice(4,10));
   }
 
   React.useEffect(() => {
-    fetchMovies()
-
-    if (currentUser) {
+    if (localStorage.getItem("loggedin", '1')) {
       fetchUserData()
     }
   },[]);
@@ -91,7 +90,7 @@ function App(props) {
         } />
         <Route path="/movies" element={
           <ProtectedRouteElement>
-            <Movies fetchMovies={fetchMovies} movies={movies}/>
+            <Movies fetchMovies={fetchMovies}/>
           </ProtectedRouteElement>
         } />
         <Route path="/saved-movies" element={

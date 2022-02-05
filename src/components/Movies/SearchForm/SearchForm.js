@@ -3,10 +3,18 @@ import FilterCheckBox from "../FilterCheckbox/FilterCheckBox";
 function SearchForm(props) {
   const [text, setText] = React.useState('')
   const [short, setShort] = React.useState(false)
+  const [showError, setShowError] = React.useState(false)
 
   const submitForm = (e) => {
     e.preventDefault()
-    props.searchHandler(text, short)
+
+
+    if (text.length >= 1) {
+      setShowError(false)
+      props.searchHandler(text, short)
+    } else {
+      setShowError(true)
+    }
   }
 
   const switchHandler = () => {
@@ -22,7 +30,6 @@ function SearchForm(props) {
             type="text"
             placeholder="Фильм"
             autoComplete="off"
-            required
             onChange={(e) => setText(e.currentTarget.value)}
             value={text}
           />
@@ -30,6 +37,12 @@ function SearchForm(props) {
             Найти
           </button>
         </div>
+
+        {showError &&
+          <div className="search-form__error">
+            Нужно ввести ключевое слово
+          </div>
+        }
 
         <FilterCheckBox short={short} switchHandler={switchHandler}/>
       </form>

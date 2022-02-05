@@ -7,16 +7,27 @@ import Preloader from "./Preloader/Preloader";
 
 function Movies(props) {
   const [loading, setLoading] = React.useState(false)
+  const [isSearchTriggered, setIsSearchTriggered] = React.useState(false)
+  const [filteredMovies, setFilteredMovies] = React.useState([])
+
+  const getFliteredMovies = (text, shortFlag) => {
+    let movies = props.fetchMovies()
+
+    return movies.filter((item) => {
+      if (shortFlag && item.duration > 40) {
+        return false
+      }
+      return (item.nameRU && item.nameRU.includes(text)) || (item.nameEN && item.nameEN.includes(text))
+    })
+  }
 
   const searchHandler = (text, shortFlag) => {
     setLoading(true)
 
-    props.fetchMovies()
+    setFilteredMovies(getFliteredMovies(text, shortFlag))
 
+    setIsSearchTriggered(true)
     setLoading(false)
-
-    console.log(text)
-    console.log(shortFlag)
   }
 
 
@@ -25,7 +36,7 @@ function Movies(props) {
       <Header/>
       <SearchForm searchHandler={searchHandler} />
       {!loading &&
-        <MoviesCardList movies={props.movies} showAll={false}/>
+        <MoviesCardList movies={filteredMovies} showAll={false} isSearchTriggered={isSearchTriggered}/>
       }
       {loading &&
         <Preloader/>
