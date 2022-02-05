@@ -34,9 +34,6 @@ function App(props) {
 
   const fetchMovies = () => {
     return moviesApi.allMovies()
-    // const mv = moviesApi.allMovies()
-    // setMovies(mv);
-    // setSavedMovies(mv.slice(4,10));
   }
 
   React.useEffect(() => {
