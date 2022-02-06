@@ -12,8 +12,10 @@ function SavedMovies(props) {
   const [movies, setMovies] = React.useState([])
   const [filteredMovies, setFilteredMovies] = React.useState([])
 
-  React.useEffect(() => {
+  const [text, setText] = React.useState()
+  const [short, setShort] = React.useState(false)
 
+  React.useEffect(() => {
     const moviesWithRefs = props.movies.map((movie) => {
       let userMovie = props.userMovies.find((userMovie) => userMovie.movieId === movie.id)
       movie.main_id = (userMovie && userMovie._id)
@@ -21,16 +23,17 @@ function SavedMovies(props) {
     }).filter(movie => movie.main_id )
 
     setMovies(moviesWithRefs)
-    setFilteredMovies(moviesWithRefs)
+    searchSavedHandler(text, short)
+  }, [props.userMovies])
 
-  }, [props.movies, props.userMovies])
-
-  const searchSavedHandler = (text, shortFlag) => {
+  const searchSavedHandler = (text, short) => {
     setIsSearchTriggered(true)
     setRows(DEFULAT_ROWS_NUMBER)
+    setText(text)
+    setShort(short)
 
     const result =  movies.filter((item) => {
-      if (shortFlag && item.duration > SHORT_DURATION) {
+      if (short && item.duration > SHORT_DURATION) {
         return false
       }
 
@@ -59,7 +62,7 @@ function SavedMovies(props) {
         allowEmpty={true}
       />
       <MoviesCardList
-        movies={filteredMovies }
+        movies={filteredMovies}
         showAll={true}
         isSearchTriggered={isSearchTriggered}
         deleteHandler={deleteHandler}

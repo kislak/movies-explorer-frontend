@@ -30,7 +30,7 @@ function Movies(props) {
       return movie
     })
     setFilteredMovies(filteredMoviesWithRefs)
-  }, [props.movies, props.userMovies])
+  }, [props.userMovies])
 
   const applyFilter = (text, shortFlag) => {
     setLoading(false)
