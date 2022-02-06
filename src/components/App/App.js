@@ -49,6 +49,7 @@ function App(props) {
       navigate('/movies')
     }).catch((err) => {
       setServerError(`${err}. Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.`);
+      setTimeout(() => setServerError(null), 10000);
       console.log(err);
     })
   }

@@ -4,9 +4,23 @@ import {useNavigate} from "react-router-dom";
 
 function Login(props) {
   const navigate = useNavigate();
-
   const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
+  const [valid, setValid] = React.useState(false)
+
+  const validPassword = () => {
+    return password.match(/^[a-zA-Z0-9!@#$%^&*]{8,}$/);
+  };
+
+  const validEmail = () => {
+    return email.match(
+      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    );
+  };
+
+  const validateForm = () => {
+    setValid(validPassword() && validEmail())
+  }
 
   const submitForm = (e) => {
     e.preventDefault();
@@ -21,7 +35,7 @@ function Login(props) {
           Рады видеть!
         </h1>
 
-        <form className="login__form" name="login" onSubmit={submitForm}>
+        <form className="login__form" name="login" onSubmit={submitForm} onFocus={validateForm}>
           <section className="login__fields">
             <label
               htmlFor="login__input-name"
@@ -37,7 +51,7 @@ function Login(props) {
               name="email"
               autoComplete="off"
               required
-              onChange={(e) => setEmail(e.currentTarget.value)}
+              onChange={(e) => { setEmail(e.currentTarget.value); validateForm() }}
               value={email}
             />
 
@@ -55,11 +69,15 @@ function Login(props) {
               name="password"
               autoComplete="off"
               required
-              onChange={(e) => setPassword(e.currentTarget.value)}
+              onChange={(e) => { setPassword(e.currentTarget.value); validateForm() }}
               value={password}
             />
           </section>
-          <button className="login__submit" type="submit">
+          <button
+            className="login__submit"
+            type="submit"
+            disabled={!valid}
+          >
             Войти
           </button>
           <div className="login__ref" >
