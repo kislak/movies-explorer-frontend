@@ -23,61 +23,10 @@ function App(props) {
   const [movies, setMovies] = React.useState([]);
   const [userMovies, setUserMovies] = React.useState([]);
   const [currentUser, setCurrentUser] = React.useState({});
-  const [savedMovies, setSavedMovies] = React.useState([])
-  const [savedFilteredMovies, setSavedFilteredMovies] = React.useState([])
-
-  const SHORT_DURATION = 40
-
-  const searchSavedHandler = (text, shortFlag) => {
-    const result =  savedMovies.filter((item) => {
-      if (shortFlag && item.duration > SHORT_DURATION) {
-        return false
-      }
-
-      if (!text) {
-        return true
-      }
-
-      return (
-        (item.nameRU && item.nameRU.toUpperCase().includes(text.toUpperCase())) ||
-        (item.nameEN && item.nameEN.toUpperCase().includes(text.toUpperCase()))
-      )
-    })
-
-    setSavedFilteredMovies(result)
-  }
-
-  const moviesWithRefs = movies.map((movie) => {
-    let userMovie = userMovies.find((userMovie) => userMovie.movieId === movie.id)
-    movie.main_id = (userMovie && userMovie._id)
-    return movie
-  }).filter((movie) => { return movie.main_id  })
-
-
-  // const searchHandler = (text, shortFlag) => {
-  //   const result = movies.filter((item) => {
-  //     if (shortFlag && item.duration > SHORT_DURATION) {
-  //       return false
-  //     }
-  //     return (
-  //       (item.nameRU && item.nameRU.toUpperCase().includes(text.toUpperCase())) ||
-  //       (item.nameEN && item.nameEN.toUpperCase().includes(text.toUpperCase()))
-  //     )
-  //   })
-  //
-  //   setFilteredMovies(result)
-  // }
 
   const saveHandler = (item) => {
     mainApi.createMovie(item).then((res) => {
-      item.main_id = res._id
-
-      setSavedMovies(moviesWithRefs)
-      // let result = filteredMovies.map((i) => {
-      //   return (i.id === item.id) ? item : i
-      // })
-
-      // setFilteredMovies(result)
+      fetchUserMovies()
     }).catch((err) => {
       console.log(err);
     })
@@ -85,45 +34,9 @@ function App(props) {
 
   const deleteHandler = (item) => {
     mainApi.deleteMovie(item.main_id).then((res) => {
-      console.log(res)
-      item.main_id = undefined;
-
-      // let result = filteredMovies.map((i) => {
-      //   if (i.id === item.id){
-      //     i.main_id = null;
-      //     return i;
-      //   } else {
-      //     return i
-      //   }
-      // })
-      // setFilteredMovies(result)
-      //
-
-      let result = savedMovies.filter(i => i.id !== item.id)
-      setSavedMovies(result)
-
-      result = savedFilteredMovies.filter(i => i.id !== item.id)
-      setSavedFilteredMovies(result)
-
+      fetchUserMovies()
     }).catch((err) => {
       console.log(err);
-    })
-  }
-
-  const fetchUserData = () => {
-    mainApi.getUser().then((user) => {
-      setCurrentUser(user)
-    }).catch((err) => {
-      console.log(err);
-    })
-  }
-
-  const fetchUserMovies = () => {
-    mainApi.getMovies().then((movies) => {
-      setUserMovies(movies)
-    }).catch((err) => {
-      console.log(err);
-      return []
     })
   }
 
@@ -159,15 +72,34 @@ function App(props) {
     })
   }
 
+  const fetchUserData = () => {
+    mainApi.getUser().then((user) => {
+      setCurrentUser(user)
+    }).catch((err) => {
+      console.log(err);
+    })
+  }
+
+  const fetchUserMovies = () => {
+    mainApi.getMovies().then((movies) => {
+      setUserMovies(movies)
+    }).catch((err) => {
+      console.log(err);
+      return []
+    })
+  }
+
+  const fetchMovies = () => {
+    setMovies(moviesApi.allMovies());
+  }
+
   React.useEffect(() => {
+    fetchMovies()
     if (localStorage.getItem("loggedin", '1')) {
       fetchUserData()
       fetchUserMovies()
     }
-    setMovies(moviesApi.allMovies());
-    setSavedMovies(moviesWithRefs);
-    setSavedFilteredMovies(moviesWithRefs);
-  },[]);
+  },[currentUser]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -183,20 +115,21 @@ function App(props) {
         <Route path="/movies" element={
           <ProtectedRouteElement>
             <Movies
-              // filteredMovies={filteredMovies}
               movies={movies}
+              userMovies={userMovies}
               saveHandler={saveHandler}
               deleteHandler={deleteHandler}
+              currentUser={currentUser}
             />
           </ProtectedRouteElement>
         } />
         <Route path="/saved-movies" element={
           <ProtectedRouteElement>
             <SavedMovies
-              savedMovies={savedMovies}
-              savedFilteredMovies={savedFilteredMovies}
-              searchSavedHandler={searchSavedHandler}
+              movies={movies}
+              userMovies={userMovies}
               deleteHandler={deleteHandler}
+              currentUser={currentUser}
             />
           </ProtectedRouteElement>
         } />

@@ -4,7 +4,6 @@ import Footer from "../Footer/Footer";
 import SearchForm from "./SearchForm/SearchForm";
 import MoviesCardList from "./MoviesCardList/MoviesCardList";
 import Preloader from "./Preloader/Preloader";
-import mainApi from "../../utils/MainApi";
 
 function Movies(props) {
   const DEFULAT_ROWS_NUMBER = 2
@@ -13,16 +12,30 @@ function Movies(props) {
   const [loading, setLoading] = React.useState(false)
   const [isSearchTriggered, setIsSearchTriggered] = React.useState(false)
   const [rows, setRows] = React.useState(DEFULAT_ROWS_NUMBER)
+  const [movies, setMovies] = React.useState([])
   const [filteredMovies, setFilteredMovies] = React.useState([])
 
   React.useEffect(() => {
-    setLoading(false)
-  }, [])
+    const moviesWithRefs = props.movies.map((movie) => {
+      let userMovie = props.userMovies.find((userMovie) => userMovie.movieId === movie.id)
+      movie.main_id = (userMovie && userMovie._id)
+      return movie
+    })
+    setMovies(moviesWithRefs)
+
+
+    const filteredMoviesWithRefs = filteredMovies.map((movie) => {
+      let userMovie = props.userMovies.find((userMovie) => userMovie.movieId === movie.id)
+      movie.main_id = (userMovie && userMovie._id)
+      return movie
+    })
+    setFilteredMovies(filteredMoviesWithRefs)
+  }, [props.movies, props.userMovies])
 
   const applyFilter = (text, shortFlag) => {
     setLoading(false)
 
-    const result = props.movies.filter((item) => {
+    const result = movies.filter((item) => {
       if (shortFlag && item.duration > SHORT_DURATION) {
         return false
       }
@@ -42,48 +55,14 @@ function Movies(props) {
     applyFilter(text, shortFlag)
   }
 
-  const saveHandler = (item) => {
-    mainApi.createMovie(item).then((res) => {
-      item.main_id = res._id
-
-      // setSavedMovies(moviesWithRefs)
-      let result = filteredMovies.map((i) => {
-        return (i.id === item.id) ? item : i
-      })
-
-      setFilteredMovies(result)
-    }).catch((err) => {
-      console.log(err);
-    })
-  }
 
   const deleteHandler = (item) => {
-    mainApi.deleteMovie(item.main_id).then((res) => {
-      console.log(res)
-      item.main_id = undefined;
-
-      let result = filteredMovies.map((i) => {
-        if (i.id === item.id){
-          i.main_id = null;
-          return i;
-        } else {
-          return i
-        }
-      })
-      setFilteredMovies(result)
-    }).catch((err) => {
-      console.log(err);
-    })
+    props.deleteHandler(item)
   }
 
-  // const saveHandler = (item) => {
-  //   props.saveHandler(item)
-  //
-  // }
-
-  // const deleteHandler = (item) => {
-  //   props.deleteHandler(item)
-  // }
+  const saveHandler = (item) => {
+    props.saveHandler(item)
+  }
 
   return (
     <div className="movies">
