@@ -28,7 +28,7 @@ function MoviesCard(props) {
         </button>
         }
 
-        {item.main_id &&
+        {item.main_id && props.savedMovies &&
         <button className="movies-card__button movies-card__button_delete"
           type="button"
           onClick={ ()=>{props.deleteHandler(item)} }
@@ -36,8 +36,11 @@ function MoviesCard(props) {
         </button>
         }
 
-        {item.showCheck &&
-        <button className="movies-card__button movies-card__button_check">
+        {item.main_id && !props.savedMovies &&
+        <button className="movies-card__button movies-card__button_check"
+          type="button"
+          onClick={ ()=>{props.deleteHandler(item)} }
+        >
         </button>
         }
 

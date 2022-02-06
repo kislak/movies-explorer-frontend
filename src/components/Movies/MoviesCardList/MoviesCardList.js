@@ -14,7 +14,7 @@ function MoviesCardList(props) {
   }
 
   const moviesToShow = () => {
-    if (props.showAll) {
+    if (props.savedMovies) {
       return movies
     }
 
@@ -25,6 +25,7 @@ function MoviesCardList(props) {
     <MoviesCard
       key={item.id}
       item={item}
+      savedMovies={props.savedMovies}
       saveHandler={props.saveHandler}
       deleteHandler={props.deleteHandler}
     />
@@ -45,7 +46,7 @@ function MoviesCardList(props) {
         {cards}
       </section>
 
-      { !props.showAll && !areAllShown() &&
+      { !props.savedMovies && !areAllShown() &&
         <section className="movies-card-list__actions">
           <button
             type="button"

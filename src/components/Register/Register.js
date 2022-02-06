@@ -8,6 +8,36 @@ function Register(props) {
   const [name, setName] = React.useState('')
   const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
+  const [valid, setValid] = React.useState(false)
+
+  const validName = () => {
+    return name.length > 1 && name.length < 30
+  }
+
+  const validEmail = () => {
+    return email.match(
+      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    );
+  };
+
+  const validPassword = () => {
+    return password.match(/^[a-zA-Z0-9!@#$%^&*]{8,}$/);
+  };
+
+  const validateForm = () => {
+    setValid(validName() && validPassword() && validEmail())
+  }
+
+  const emailChangeHandler = (e) => {
+    setEmail(e.currentTarget.value)
+    validateForm()
+  }
+
+  const passwordChangeHandler = (e) => {
+    setPassword(e.currentTarget.value)
+    validateForm()
+  }
+
 
   const submitForm = (e) => {
     e.preventDefault();
@@ -38,7 +68,7 @@ function Register(props) {
             name="name"
             autoComplete="off"
             required
-            onChange={(e) => setName(e.currentTarget.value)}
+            onChange={(e) => { setName(e.currentTarget.value); validateForm() }}
             value={name}
           />
 
@@ -56,7 +86,7 @@ function Register(props) {
             name="email"
             autoComplete="off"
             required
-            onChange={(e) => setEmail(e.currentTarget.value)}
+            onChange={emailChangeHandler}
             value={email}
           />
 
@@ -74,14 +104,19 @@ function Register(props) {
             name="password"
             autoComplete="off"
             required
-            onChange={(e) => setPassword(e.currentTarget.value)}
+            onChange={passwordChangeHandler}
             value={password}
           />
-          <p className="register__error-text">
-            Что-то пошло не так...
-          </p>
+            <p className="register__error-text">
+              {props.serverError}
+            </p>
+
           </section>
-          <button className="register__submit" type="submit">
+          <button
+            className="register__submit"
+            disabled={!valid}
+            type="submit"
+          >
             Зарегистрироваться
           </button>
           <div className="register__ref" >

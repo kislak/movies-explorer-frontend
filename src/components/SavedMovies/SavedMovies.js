@@ -63,7 +63,7 @@ function SavedMovies(props) {
       />
       <MoviesCardList
         movies={filteredMovies}
-        showAll={true}
+        savedMovies={true}
         isSearchTriggered={isSearchTriggered}
         deleteHandler={deleteHandler}
         rows={rows}

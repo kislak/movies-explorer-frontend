@@ -23,6 +23,7 @@ function App(props) {
   const [movies, setMovies] = React.useState([]);
   const [userMovies, setUserMovies] = React.useState([]);
   const [currentUser, setCurrentUser] = React.useState({});
+  const [serverError, setServerError] = React.useState(null);
 
   const saveHandler = (item) => {
     mainApi.createMovie(item).then((res) => {
@@ -41,12 +42,13 @@ function App(props) {
   }
 
   const registerHandler = (name, email, password) => {
+    setServerError(null)
     mainApi.signUp(name, email, password).then((res) => {
       localStorage.setItem("loggedin", '1')
       fetchUserData()
-
       navigate('/movies')
     }).catch((err) => {
+      setServerError(`${err}. Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.`);
       console.log(err);
     })
   }
@@ -105,11 +107,22 @@ function App(props) {
     <CurrentUserContext.Provider value={currentUser}>
       <Routes>
         <Route path="/" element={<Main/>} />
-        <Route path="/signup" element={<Register registerHandler={registerHandler} />} />
-        <Route path="/signin" element={<Login loginHandler={loginHandler} />} />
+        <Route path="/signup" element={
+          <Register
+            registerHandler={registerHandler}
+            serverError={serverError}
+          />}
+        />
+        <Route path="/signin" element={
+          <Login
+            loginHandler={loginHandler}
+          />}
+        />
         <Route path="/profile" element={
           <ProtectedRouteElement>
-            <Profile logoutHandler={logoutHandler}/>
+            <Profile
+              logoutHandler={logoutHandler}
+            />
           </ProtectedRouteElement>
         } />
         <Route path="/movies" element={
