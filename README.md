@@ -16,3 +16,8 @@ https://www.youtube.com/watch?v=zEQiNFAwDGo
 
 ## bem checker
 https://yoksel.github.io/html-tree/
+
+
+##
+kino.nomoredomains.xyz
+62.84.114.60

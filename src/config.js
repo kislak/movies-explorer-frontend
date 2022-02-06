@@ -1,7 +1,12 @@
 const config = {
     moviesUrl: "//api.kino.nomoredomains.rocks",
-    mainUrl: "//localhost:4000"
+    mainUrl: "//kino.nomoredomains.xyz/api"
 }
+
+// const config = {
+//     moviesUrl: "//api.nomoreparties.co/beatfilm-movies",
+//     mainUrl: "//api.kino.nomoredomains.rocks"
+// }
 
 export default config
 
