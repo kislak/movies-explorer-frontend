@@ -123,6 +123,7 @@ function App(props) {
           <ProtectedRouteElement>
             <Profile
               logoutHandler={logoutHandler}
+              fetchUserData={fetchUserData}
             />
           </ProtectedRouteElement>
         } />

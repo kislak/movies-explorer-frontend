@@ -1,9 +1,48 @@
 import React from "react";
 import Header from "../Header/Header";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext.js"
+import mainApi from "../../utils/MainApi";
 
 function Profile(props) {
   const currentUser = React.useContext(CurrentUserContext);
+
+  const [name, setName] = React.useState(currentUser.name)
+  const [email, setEmail] = React.useState(currentUser.email)
+  const [valid, setValid] = React.useState(false)
+  const [serverError, setServerError] = React.useState(null);
+  const [serverSuccess, setServerSuccess] = React.useState(null);
+
+  const validName = () => {
+    return name.length > 1 && name.length < 30
+  }
+
+  const validEmail = () => {
+    return email.match(
+      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    );
+  };
+
+  const validateForm = () => {
+    setValid(validName() && validEmail())
+  }
+
+  const submitForm = (e) => {
+    e.preventDefault();
+
+    setServerSuccess(null);
+    setServerError(null);
+
+    mainApi.patchUser(name, email).then((res) => {
+      setServerSuccess('Профайл обновлен успешно!');
+      setTimeout(() => setServerSuccess(null), 10000);
+
+      props.fetchUserData()
+    }).catch((err) => {
+      setServerError("При обновлении профиля произошла ошибка.");
+      setTimeout(() => setServerError(null), 10000);
+      console.log(err);
+    })
+  }
 
   return (
     <section className="profile">
@@ -12,33 +51,63 @@ function Profile(props) {
         {`Привет, ${currentUser.name}!`}
       </h1>
 
-      <section className="profile__details">
-        <section className="profile__detail">
-          <p className="profile__details-title">
-            Имя
-          </p>
-          <p className="profile__details-item">
-            {currentUser.name}
-          </p>
-        </section>
-        <section className="profile__detail">
-          <p className="profile__details-title">
-            E-mail
-          </p>
-          <p className="profile__details-item">
-            {currentUser.email}
-          </p>
-        </section>
-      </section>
+      <form className="profile__form" name="profile" onSubmit={submitForm}>
+        <section className="profile__details">
+          <section className="profile__detail">
+            <label className="profile__details-title" htmlFor="profile__input-name">
+              Имя
+            </label>
+            <input
+              id="profile__input-name"
+              className="profile__details-item"
+              type="text"
+              name="email"
+              autoComplete="off"
+              required
+              onChange={(e) => { setName(e.currentTarget.value); validateForm() }}
+              value={name}
+            />
+          </section>
 
-      <nav className="profile__links" >
-        <a className="profile__link" href="#">
-          Редактировать
-        </a>
-        <a className="profile__link profile__link_red" href="#" onClick={props.logoutHandler}>
-          Выйти из аккаунта
-        </a>
-      </nav>
+          <section className="profile__detail">
+            <label className="profile__details-title" htmlFor="profile__input-email">
+              E-mail
+            </label>
+            <input
+              id="profile__input-name"
+              className="profile__details-item"
+              type="text"
+              name="email"
+              autoComplete="off"
+              required
+              onChange={(e) => { setEmail(e.currentTarget.value); validateForm() }}
+              value={email}
+            />
+          </section>
+        </section>
+
+
+        <nav className="profile__links" >
+          <button
+            className="profile__submit"
+            type="submit"
+            disabled={!valid}
+          >
+            Редактировать
+          </button>
+
+          <p className="profile__notice profile__notice_error">
+            {serverError}
+          </p>
+          <p className="profile__notice profile__notice_success">
+            {serverSuccess}
+          </p>
+
+          <a className="profile__link profile__link_red" href="#" onClick={props.logoutHandler}>
+            Выйти из аккаунта
+          </a>
+        </nav>
+      </form>
     </section>
   )
 }
