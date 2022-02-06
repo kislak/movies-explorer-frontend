@@ -1,14 +1,14 @@
 import React from "react";
 import FilterCheckBox from "../FilterCheckbox/FilterCheckBox";
 function SearchForm(props) {
-  const [text, setText] = React.useState('')
+  const [text, setText] = React.useState()
   const [short, setShort] = React.useState(false)
   const [showError, setShowError] = React.useState(false)
 
   const submitForm = (e) => {
     e.preventDefault()
 
-    if (text.length >= 1) {
+    if (props.allowEmpty || text.length >= 1) {
       setShowError(false)
       props.searchHandler(text, short)
     } else {
@@ -30,7 +30,6 @@ function SearchForm(props) {
             placeholder="Фильм"
             autoComplete="off"
             onChange={(e) => setText(e.currentTarget.value)}
-            value={text}
           />
           <button className="search-form__submit" type="submit">
             Найти
