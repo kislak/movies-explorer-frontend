@@ -9,6 +9,7 @@ class MainApi {
         return fetch(`${this._baseUrl}/signup`, {
             method: "POST",
             credentials: 'include',
+            withCredentials: true,
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -25,6 +26,7 @@ class MainApi {
         return fetch(`${this._baseUrl}/signin`, {
             method: "POST",
             credentials: 'include',
+            withCredentials: true,
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -40,6 +42,7 @@ class MainApi {
         return fetch(`${this._baseUrl}/signout`, {
             method: "POST",
             credentials: 'include',
+            withCredentials: true,
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -50,6 +53,7 @@ class MainApi {
         return fetch(`${this._baseUrl}/users/me`, {
             method: "GET",
             credentials: "include",
+            withCredentials: true,
             headers: {
                 "Content-Type": "application/json",
                 // "Authorization" : `Bearer ${localStorage.getItem("AuthToken")}`
@@ -61,6 +65,7 @@ class MainApi {
         return fetch(`${this._baseUrl}/users/me`, {
             method: "PATCH",
             credentials: "include",
+            withCredentials: true,
             headers: {
                 "Content-Type": "application/json",
             },
@@ -97,9 +102,10 @@ class MainApi {
       } = item
 
       return fetch(`${this._baseUrl}/movies`, {
-            method: "POST",
-            credentials: "include",
-            headers: {
+        method: "POST",
+        credentials: "include",
+        withCredentials: true,
+        headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(
@@ -121,9 +127,10 @@ class MainApi {
 
     deleteMovie(id) {
         return fetch(`${this._baseUrl}/movies/${id}`, {
-            method: "DELETE",
-            credentials: "include",
-            headers: {
+          method: "DELETE",
+          credentials: "include",
+          withCredentials: true,
+          headers: {
                 "Content-Type": "application/json",
             }
         }).then(res => this._getResponseData(res));
