@@ -93,7 +93,18 @@ function App(props) {
   }
 
   const fetchMovies = () => {
-    setMovies(moviesApi.allMovies());
+    const movies = localStorage.getItem('movies')
+    if (movies) {
+      setMovies(JSON.parse(movies));
+      return;
+    }
+
+    moviesApi.getAllMovies().then((movies) => {
+      setMovies(movies);
+      localStorage.setItem("movies", JSON.stringify(movies))
+    }).catch((err) => {
+      console.log(err);
+    })
   }
 
   React.useEffect(() => {
