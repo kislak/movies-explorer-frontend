@@ -13,8 +13,6 @@ import moviesApi from "../../utils/MoviesApi";
 import mainApi from "../../utils/MainApi";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext.js"
 import ProtectedRoute from "../ProtectedRoute";
-import {} from "react-router-dom";
-
 
 
 function App(props) {

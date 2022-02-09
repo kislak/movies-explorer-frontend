@@ -24,8 +24,8 @@ function Movies(props) {
     setMovies(moviesWithRefs)
 
     if (moviesWithRefs.length) {
-      const shortFlag = localStorage.getItem('movieSearchShortFlag')
-      const text = localStorage.getItem('movieSearchText')
+      const text = localStorage.getItem('movieSearchText') || ''
+      const shortFlag = (localStorage.getItem('movieSearchShortFlag') === true)
 
       const result = moviesWithRefs.filter((item) => {
         if (shortFlag && item.duration > SHORT_DURATION) {
@@ -82,8 +82,8 @@ function Movies(props) {
       <SearchForm
         key="moviesSF"
         searchHandler={searchHandler}
-        text={localStorage.getItem('movieSearchText')}
-        short={localStorage.getItem('movieSearchShortFlag')}
+        text={localStorage.getItem('movieSearchText') || ''}
+        short={localStorage.getItem('movieSearchShortFlag') === 'true'}
       />
       {!loading &&
         <MoviesCardList
