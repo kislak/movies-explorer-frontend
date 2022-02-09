@@ -1,9 +1,8 @@
 import React from "react";
 import Header from "../Header/Header";
-import {useNavigate} from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 function Login(props) {
-  const navigate = useNavigate();
   const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
   const [valid, setValid] = React.useState(false)
@@ -81,7 +80,7 @@ function Login(props) {
             Войти
           </button>
           <div className="login__ref" >
-            Уже зарегистрированы? <a className="login__link" onClick={() => navigate('/signup') }  >Регистрация</a>
+            Уже зарегистрированы? <Link className="login__link" to='/signup' >Регистрация</Link>
           </div>
         </form>
       </section>

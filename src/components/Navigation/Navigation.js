@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { useNavigate, useLocation } from "react-router-dom/index";
+import { Link } from 'react-router-dom';
 
 function Navigation(props) {
-  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -14,26 +13,28 @@ function Navigation(props) {
   const nav = <>
     <nav className="navigation navigation__desktop">
       <section className="navigation__block navigation__block_desktop">
-        <a
+        <Link
           className="navigation__link"
-          onClick={() => navigate('/movies')}
+          to="/movies"
         >
           Фильмы
-        </a>
-        <a
+        </Link>
+        <Link
           className="navigation__link"
-          onClick={() => navigate('/saved-movies')}
+          to="/saved-movies"
         >
           Сохранённые фильмы
-        </a>
+        </Link>
       </section>
-      <button
-        className="navigation__button navigation__button_profile"
-        onClick={() => navigate('/profile')}
-        type="button"
-      >
-        Аккаунт
-      </button>
+
+      <Link to='/profile'>
+        <button
+          className="navigation__button navigation__button_profile"
+          type="button"
+        >
+          Аккаунт
+        </button>
+      </Link>
     </nav>
 
     <nav className="navigation navigation__mobile">
@@ -56,34 +57,36 @@ function Navigation(props) {
           </button>
 
           <div className="navigation__menu">
-            <a
+            <Link
               className="navigation__link navigation__link_mobile"
-              onClick={() => navigate('/')}
+              to="/"
             >
               Главная
-            </a>
+            </Link>
 
-            <a
+            <Link
               className="navigation__link navigation__link_mobile"
-              onClick={() => navigate('/movies')}
+              to="movies"
             >
               Фильмы
-            </a>
+            </Link>
 
-            <a
+            <Link
               className="navigation__link navigation__link_mobile"
-              onClick={() => navigate('/saved-movies')}
+              to="/saved-movies"
             >
               Сохранённые фильмы
-            </a>
+            </Link>
 
+            <Link to='/profile'>
             <button
               className="navigation__button navigation__button_profile navigation__button_center"
-              onClick={() => navigate('/profile')}
+
               type="button"
             >
               Аккаунт
             </button>
+            </Link>
           </div>
 
         </section>
@@ -94,19 +97,20 @@ function Navigation(props) {
 
   const loginNav = <nav className="navigation">
     <section className="navigation__block">
-      <a
+      <Link
               className="navigation__link"
-              onClick={() => navigate('/signup')}
+              to='/signup'
             >
       Регистрация
-      </a>
-      <button
-        className="navigation__button navigation__button_blue"
-        onClick={() => navigate('/signin')}
-        type="button"
-      >
-        Войти
-      </button>
+      </Link>
+      <Link to='/signin'>
+        <button
+          className="navigation__button navigation__button_blue"
+          type="button"
+        >
+          Войти
+        </button>
+      </Link>
     </section>
   </nav>
 

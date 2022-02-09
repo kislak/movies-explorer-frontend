@@ -1,8 +1,9 @@
 import React from "react";
-import {useNavigate} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 
 function NotFound(props) {
-  const navigate = useNavigate();
+  const history = useHistory();
+
   return (
     <section className="not-found">
       <p className="not-found__code">
@@ -11,7 +12,7 @@ function NotFound(props) {
       <p className="not-found__details">
         Страница не найдена
       </p>
-      <a className="not-found__back" onClick={() => navigate(-1)}>
+      <a className="not-found__back" onClick={history.goBack}>
         Назад
       </a>
     </section>

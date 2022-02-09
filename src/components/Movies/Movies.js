@@ -23,22 +23,26 @@ function Movies(props) {
     })
     setMovies(moviesWithRefs)
 
+    if (moviesWithRefs.length) {
+      const shortFlag = localStorage.getItem('movieSearchShortFlag')
+      const text = localStorage.getItem('movieSearchText')
 
-    const filteredMoviesWithRefs = filteredMovies.map((movie) => {
-      let userMovie = props.userMovies.find((userMovie) => userMovie.movieId === movie.id)
-      movie.main_id = (userMovie && userMovie._id)
-      return movie
-    })
-    if (filteredMoviesWithRefs.length) {
-      setFilteredMoviesAndStore(filteredMoviesWithRefs)
+      const result = moviesWithRefs.filter((item) => {
+        if (shortFlag && item.duration > SHORT_DURATION) {
+          return false
+        }
+        return (
+          (item.nameRU && item.nameRU.toUpperCase().includes(text.toUpperCase())) ||
+          (item.nameEN && item.nameEN.toUpperCase().includes(text.toUpperCase()))
+        )
+      })
+
+      setFilteredMovies(result)
     }
-  }, [props.userMovies]
-  )
+  }, [props.userMovies, props.movies])
 
 
   const applyFilter = (text, shortFlag) => {
-    setLoading(false)
-
     const result = movies.filter((item) => {
       if (shortFlag && item.duration > SHORT_DURATION) {
         return false
@@ -49,7 +53,8 @@ function Movies(props) {
       )
     })
 
-    setFilteredMoviesAndStore(result)
+    setLoading(false)
+    setFilteredMovies(result)
   }
 
   const searchHandler = (text, shortFlag) => {
@@ -71,20 +76,6 @@ function Movies(props) {
     props.saveHandler(item)
   }
 
-  const setFilteredMoviesAndStore = (movies) => {
-    setFilteredMovies(movies)
-    localStorage.setItem('filteredMovies', JSON.stringify(movies));
-  }
-
-  const movies_or_stored_movies = () => {
-    if (filteredMovies.length) { return filteredMovies }
-    if (localStorage.getItem('filteredMovies')) {
-      const movies = JSON.parse(localStorage.getItem('filteredMovies'))
-      return movies
-    }
-    return filteredMovies
-  }
-
   return (
     <div className="movies">
       <Header/>
@@ -97,7 +88,7 @@ function Movies(props) {
       {!loading &&
         <MoviesCardList
           key="moviesMCL"
-          movies={movies_or_stored_movies()}
+          movies={filteredMovies}
           isSearchTriggered={isSearchTriggered}
           rows={rows}
           setRows={setRows}

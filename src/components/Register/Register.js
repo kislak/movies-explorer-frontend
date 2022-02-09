@@ -1,10 +1,8 @@
 import React from "react";
 import Header from "../Header/Header";
-import {useNavigate} from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 function Register(props) {
-  const navigate = useNavigate();
-
   const [name, setName] = React.useState('')
   const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
@@ -133,7 +131,7 @@ function Register(props) {
             Зарегистрироваться
           </button>
           <div className="register__ref" >
-            Уже зарегистрированы? <a className="register__link" onClick={() => navigate('/signin') } >Войти</a>
+            Уже зарегистрированы? <Link className="register__link" to="/signin" >Войти</Link>
           </div>
         </form>
       </section>

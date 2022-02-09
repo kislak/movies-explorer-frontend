@@ -1,9 +1,6 @@
 import React from "react";
 
-import {
-  Routes,
-  Route
-} from "react-router-dom/index";
+import { Route, Switch, withRouter, useHistory } from 'react-router-dom';
 
 import Main from '../Main/Main.js'
 import Movies from '../Movies/Movies.js'
@@ -15,15 +12,17 @@ import NotFound from '../NotFound/NotFound.js'
 import moviesApi from "../../utils/MoviesApi";
 import mainApi from "../../utils/MainApi";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext.js"
-import { useNavigate } from "react-router-dom/index";
-import ProtectedRouteElement from "../ProtectedRouteElement";
+import ProtectedRoute from "../ProtectedRoute";
+import {} from "react-router-dom";
+
+
 
 function App(props) {
-  const navigate = useNavigate();
   const [movies, setMovies] = React.useState([]);
   const [userMovies, setUserMovies] = React.useState([]);
   const [currentUser, setCurrentUser] = React.useState({});
   const [serverError, setServerError] = React.useState(undefined);
+  const history = useHistory();
 
   const saveHandler = (item) => {
     mainApi.createMovie(item).then((res) => {
@@ -46,7 +45,7 @@ function App(props) {
     mainApi.signUp(name, email, password).then((res) => {
       localStorage.setItem("loggedin", '1')
       fetchUserData()
-      navigate('/movies')
+      history.push('/movies');
     }).catch((err) => {
       setServerError(`${err}. Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.`);
       setTimeout(() => setServerError(undefined), 10000);
@@ -59,8 +58,7 @@ function App(props) {
       localStorage.setItem("loggedin", '1')
       fetchUserData()
       fetchUserMovies()
-
-      navigate('/movies')
+      history.push('/movies');
     }).catch((err) => {
       console.log(err);
     })
@@ -68,7 +66,7 @@ function App(props) {
 
   const logoutHandler = () => {
     mainApi.signOut().then((res) => {
-      navigate('/')
+      history.push('/');
       setCurrentUser({})
       localStorage.clear();
     }).catch((err) => {
@@ -113,7 +111,7 @@ function App(props) {
   },[]);
 
   React.useEffect(() => {
-    if (localStorage.getItem("loggedin", '1')) {
+    if (localStorage.getItem("loggedin") === "1") {
       fetchUserData()
       fetchUserMovies()
     }
@@ -122,52 +120,55 @@ function App(props) {
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <Routes>
-        <Route path="/" element={<Main/>} />
-        <Route path="/signup" element={
+      <Switch>
+        <Route path="/signup" exact>
           <Register
             registerHandler={registerHandler}
             serverError={serverError}
-          />}
-        />
-        <Route path="/signin" element={
+          />
+        </Route>
+        <Route path="/signin" exact>
           <Login
             loginHandler={loginHandler}
-          />}
-        />
-        <Route path="/profile" element={
-          <ProtectedRouteElement>
-            <Profile
-              logoutHandler={logoutHandler}
-              fetchUserData={fetchUserData}
-            />
-          </ProtectedRouteElement>
-        } />
-        <Route path="/movies" element={
-          <ProtectedRouteElement>
-            <Movies
+          />
+        </Route>
+
+        <Route path="/" exact>
+          <Main/>
+        </Route>
+
+        <ProtectedRoute path="/profile">
+          <Profile
+            logoutHandler={logoutHandler}
+            fetchUserData={fetchUserData}
+          />
+        </ProtectedRoute>
+
+        <ProtectedRoute path="/movies">
+          <Movies
               movies={movies}
               userMovies={userMovies}
               saveHandler={saveHandler}
               deleteHandler={deleteHandler}
               currentUser={currentUser}
             />
-          </ProtectedRouteElement>
-        } />
-        <Route path="/saved-movies" element={
-          <ProtectedRouteElement>
-            <SavedMovies
+        </ProtectedRoute>
+
+        <ProtectedRoute path="/saved-movies">
+          <SavedMovies
               movies={movies}
               userMovies={userMovies}
               deleteHandler={deleteHandler}
               currentUser={currentUser}
             />
-          </ProtectedRouteElement>
-        } />
-        <Route path="*" element={<NotFound/>} />
-      </Routes>
+        </ProtectedRoute>
+
+        <Route path="/" >
+          <NotFound/>
+        </Route>
+      </Switch>
     </CurrentUserContext.Provider>
     )
 }
 
-export default App;
+export default withRouter(App);
