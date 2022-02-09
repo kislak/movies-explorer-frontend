@@ -8,14 +8,11 @@ function Profile(props) {
 
   const [name, setName] = React.useState(currentUser.name)
   const [email, setEmail] = React.useState(currentUser.email)
-  const [currentName, setCurrentName] = React.useState(currentUser.name)
-  const [currentEmail, setCurrentEmail] = React.useState(currentUser.email)
-
-  const [valid, setValid] = React.useState(false)
   const [serverError, setServerError] = React.useState(undefined);
   const [serverSuccess, setServerSuccess] = React.useState(undefined);
-  const [validName, setValidName] = React.useState(true)
-  const [validEmail, setValidEmail] = React.useState(true)
+  const [validName, setValidName] = React.useState(false)
+  const [validEmail, setValidEmail] = React.useState(false)
+  const [valid, setValid] = React.useState(false)
 
   const validNameCheck = () => {
     return (name.length > 1 && name.length < 30)
@@ -38,9 +35,6 @@ function Profile(props) {
     setServerError(undefined);
 
     mainApi.patchUser(name, email).then((res) => {
-      setCurrentName(name)
-      setCurrentEmail(email)
-
       props.fetchUserData()
       setServerSuccess('Профайл обновлен успешно!');
       setTimeout(() => setServerSuccess(undefined), 10000);
@@ -55,17 +49,16 @@ function Profile(props) {
     e.preventDefault();
 
     setName(e.target.value);
-    const valid = (validNameCheck(e.target.value) && currentName !== e.target.value)
-    setValidName(valid)
+    setValidName(validNameCheck(e.target.value))
+    setValidEmail(email)
   }
 
   const emailChangeHandler = (e) => {
     e.preventDefault();
 
     setEmail(e.target.value)
-    const valid = (validEmailCheck(e.target.value) && currentEmail !== e.target.value)
-
-    setValidEmail(valid)
+    setValidEmail(validEmailCheck(e.target.value))
+    setValidName(name)
   }
 
   React.useEffect(() => {
