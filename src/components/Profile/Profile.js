@@ -9,8 +9,8 @@ function Profile(props) {
   const [name, setName] = React.useState(currentUser.name)
   const [email, setEmail] = React.useState(currentUser.email)
   const [valid, setValid] = React.useState(false)
-  const [serverError, setServerError] = React.useState(null);
-  const [serverSuccess, setServerSuccess] = React.useState(null);
+  const [serverError, setServerError] = React.useState(undefined);
+  const [serverSuccess, setServerSuccess] = React.useState(undefined);
 
   const validName = () => {
     return name.length > 1 && name.length < 30
@@ -29,17 +29,17 @@ function Profile(props) {
   const submitForm = (e) => {
     e.preventDefault();
 
-    setServerSuccess(null);
-    setServerError(null);
+    setServerSuccess(undefined);
+    setServerError(undefined);
 
     mainApi.patchUser(name, email).then((res) => {
       setServerSuccess('Профайл обновлен успешно!');
-      setTimeout(() => setServerSuccess(null), 10000);
+      setTimeout(() => setServerSuccess(undefined), 10000);
 
       props.fetchUserData()
     }).catch((err) => {
       setServerError("При обновлении профиля произошла ошибка.");
-      setTimeout(() => setServerError(null), 10000);
+      setTimeout(() => setServerError(undefined), 10000);
       console.log(err);
     })
   }

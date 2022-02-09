@@ -29,8 +29,12 @@ function Movies(props) {
       movie.main_id = (userMovie && userMovie._id)
       return movie
     })
-    setFilteredMovies(filteredMoviesWithRefs)
-  }, [props.userMovies])
+    if (filteredMoviesWithRefs.length) {
+      setFilteredMoviesAndStore(filteredMoviesWithRefs)
+    }
+  }, [props.userMovies]
+  )
+
 
   const applyFilter = (text, shortFlag) => {
     setLoading(false)
@@ -45,16 +49,19 @@ function Movies(props) {
       )
     })
 
-    setFilteredMovies(result)
+    setFilteredMoviesAndStore(result)
   }
 
   const searchHandler = (text, shortFlag) => {
     setLoading(true)
     setIsSearchTriggered(true)
     setRows(DEFULAT_ROWS_NUMBER)
+
+    localStorage.setItem('movieSearchText', text)
+    localStorage.setItem('movieSearchShortFlag', shortFlag)
+
     applyFilter(text, shortFlag)
   }
-
 
   const deleteHandler = (item) => {
     props.deleteHandler(item)
@@ -64,16 +71,33 @@ function Movies(props) {
     props.saveHandler(item)
   }
 
+  const setFilteredMoviesAndStore = (movies) => {
+    setFilteredMovies(movies)
+    localStorage.setItem('filteredMovies', JSON.stringify(movies));
+  }
+
+  const movies_or_stored_movies = () => {
+    if (filteredMovies.length) { return filteredMovies }
+    if (localStorage.getItem('filteredMovies')) {
+      const movies = JSON.parse(localStorage.getItem('filteredMovies'))
+      return movies
+    }
+    return filteredMovies
+  }
+
   return (
     <div className="movies">
       <Header/>
       <SearchForm
+        key="moviesSF"
         searchHandler={searchHandler}
+        text={localStorage.getItem('movieSearchText')}
+        short={localStorage.getItem('movieSearchShortFlag')}
       />
       {!loading &&
         <MoviesCardList
-          movies={filteredMovies}
-          showAll={false}
+          key="moviesMCL"
+          movies={movies_or_stored_movies()}
           isSearchTriggered={isSearchTriggered}
           rows={rows}
           setRows={setRows}

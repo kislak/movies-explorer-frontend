@@ -23,7 +23,7 @@ function MoviesCardList(props) {
 
   const cards = moviesToShow().map((item) => (
     <MoviesCard
-      key={item.id}
+      key={`${item.id}${props.savedMovies}`}
       item={item}
       savedMovies={props.savedMovies}
       saveHandler={props.saveHandler}

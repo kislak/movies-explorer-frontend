@@ -23,7 +23,7 @@ function App(props) {
   const [movies, setMovies] = React.useState([]);
   const [userMovies, setUserMovies] = React.useState([]);
   const [currentUser, setCurrentUser] = React.useState({});
-  const [serverError, setServerError] = React.useState(null);
+  const [serverError, setServerError] = React.useState(undefined);
 
   const saveHandler = (item) => {
     mainApi.createMovie(item).then((res) => {
@@ -42,14 +42,14 @@ function App(props) {
   }
 
   const registerHandler = (name, email, password) => {
-    setServerError(null)
+    setServerError(undefined)
     mainApi.signUp(name, email, password).then((res) => {
       localStorage.setItem("loggedin", '1')
       fetchUserData()
       navigate('/movies')
     }).catch((err) => {
       setServerError(`${err}. Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.`);
-      setTimeout(() => setServerError(null), 10000);
+      setTimeout(() => setServerError(undefined), 10000);
       console.log(err);
     })
   }
@@ -70,6 +70,9 @@ function App(props) {
       localStorage.setItem("loggedin", '0')
       navigate('/')
       setCurrentUser({})
+      localStorage.setItem("movieSearchText", undefined)
+      localStorage.setItem("movieSearchShortFlag", undefined)
+
     }).catch((err) => {
       console.log(err);
     })
@@ -109,11 +112,15 @@ function App(props) {
 
   React.useEffect(() => {
     fetchMovies()
+  },[]);
+
+  React.useEffect(() => {
     if (localStorage.getItem("loggedin", '1')) {
       fetchUserData()
       fetchUserMovies()
     }
-  },[currentUser]);
+  }, []);
+
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
