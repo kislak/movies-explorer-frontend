@@ -58,6 +58,7 @@ function App(props) {
     mainApi.signIn(email, password).then((res) => {
       localStorage.setItem("loggedin", '1')
       fetchUserData()
+      fetchUserMovies()
 
       navigate('/movies')
     }).catch((err) => {
@@ -67,12 +68,9 @@ function App(props) {
 
   const logoutHandler = () => {
     mainApi.signOut().then((res) => {
-      localStorage.setItem("loggedin", '0')
       navigate('/')
       setCurrentUser({})
-      localStorage.setItem("movieSearchText", undefined)
-      localStorage.setItem("movieSearchShortFlag", undefined)
-
+      localStorage.clear();
     }).catch((err) => {
       console.log(err);
     })

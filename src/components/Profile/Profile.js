@@ -8,6 +8,9 @@ function Profile(props) {
 
   const [name, setName] = React.useState(currentUser.name)
   const [email, setEmail] = React.useState(currentUser.email)
+  const [currentName, setCurrentName] = React.useState(currentUser.name)
+  const [currentEmail, setCurrentEmail] = React.useState(currentUser.email)
+
   const [valid, setValid] = React.useState(false)
   const [serverError, setServerError] = React.useState(undefined);
   const [serverSuccess, setServerSuccess] = React.useState(undefined);
@@ -23,7 +26,7 @@ function Profile(props) {
   };
 
   const validateForm = () => {
-    setValid(validName() && validEmail())
+    setValid(validName() && validEmail() && (name != currentName || email != currentEmail))
   }
 
   const submitForm = (e) => {
@@ -36,6 +39,9 @@ function Profile(props) {
       setServerSuccess('Профайл обновлен успешно!');
       setTimeout(() => setServerSuccess(undefined), 10000);
 
+      setCurrentName(name)
+      setCurrentEmail(email)
+
       props.fetchUserData()
     }).catch((err) => {
       setServerError("При обновлении профиля произошла ошибка.");
@@ -43,6 +49,17 @@ function Profile(props) {
       console.log(err);
     })
   }
+
+  const nameChangeHandler = (e) => {
+    setName(e.currentTarget.value);
+    validateForm()
+  }
+
+  const emailChangeHandler = (e) => {
+    setEmail(e.currentTarget.value)
+    validateForm()
+  }
+
 
   return (
     <section className="profile">
@@ -64,7 +81,7 @@ function Profile(props) {
               name="email"
               autoComplete="off"
               required
-              onChange={(e) => { setName(e.currentTarget.value); validateForm() }}
+              onChange={nameChangeHandler}
               value={name}
             />
           </section>
@@ -80,7 +97,7 @@ function Profile(props) {
               name="email"
               autoComplete="off"
               required
-              onChange={(e) => { setEmail(e.currentTarget.value); validateForm() }}
+              onChange={emailChangeHandler}
               value={email}
             />
           </section>
