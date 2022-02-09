@@ -25,26 +25,16 @@ function Register(props) {
     return password.match(/^[a-zA-Z0-9!@#$%^&*]{8,}$/);
   };
 
-  const validateForm = () => {
-    setValidName(validNameCheck())
-    setValidEmail(validEmailCheck())
-    setValidPassword(validPasswordCheck())
-    setValid(validName && validPassword && validEmail)
-  }
-
   const nameChangeHandler = (e) => {
-    setName(e.currentTarget.value);
-    validateForm()
+    setName(e.target.value);
   }
 
   const emailChangeHandler = (e) => {
-    setEmail(e.currentTarget.value)
-    validateForm()
+    setEmail(e.target.value)
   }
 
   const passwordChangeHandler = (e) => {
-    setPassword(e.currentTarget.value)
-    validateForm()
+    setPassword(e.target.value)
   }
 
   const submitForm = (e) => {
@@ -54,6 +44,22 @@ function Register(props) {
       props.registerHandler(name, email, password)
     }
   }
+
+  React.useEffect(() => {
+    setValidName(validNameCheck())
+  }, [name]);
+
+  React.useEffect(() => {
+    setValidEmail(validEmailCheck())
+  }, [email]);
+
+  React.useEffect(() => {
+    setValidPassword(validPasswordCheck())
+  }, [password]);
+
+  React.useEffect(() => {
+    setValid(validName && validEmail && validPassword)
+  }, [validName, validEmail, validPassword]);
 
   return (
     <section className="register">

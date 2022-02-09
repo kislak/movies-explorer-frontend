@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import {CurrentUserContext} from "../../contexts/CurrentUserContext";
 
 function Navigation(props) {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const currentUser = React.useContext(CurrentUserContext);
 
   React.useEffect(() => {
     setIsLoggedIn(localStorage.getItem("loggedin") === '1')
-  }, []);
+  }, [currentUser]);
 
 
   const nav = <>

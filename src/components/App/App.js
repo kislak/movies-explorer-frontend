@@ -42,7 +42,7 @@ function App(props) {
     setServerError(undefined)
     mainApi.signUp(name, email, password).then((res) => {
       localStorage.setItem("loggedin", '1')
-      fetchUserData()
+      fetchUserData();
       history.push('/movies');
     }).catch((err) => {
       setServerError(`${err}. Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.`);
@@ -54,8 +54,8 @@ function App(props) {
   const loginHandler = (email, password) => {
     mainApi.signIn(email, password).then((res) => {
       localStorage.setItem("loggedin", '1')
-      fetchUserData()
-      fetchUserMovies()
+      fetchUserData();
+      fetchUserMovies();
       history.push('/movies');
     }).catch((err) => {
       console.log(err);
@@ -139,6 +139,7 @@ function App(props) {
           <Profile
             logoutHandler={logoutHandler}
             fetchUserData={fetchUserData}
+            currentUser={currentUser}
           />
         </ProtectedRoute>
 

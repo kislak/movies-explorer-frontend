@@ -26,6 +26,11 @@ function Login(props) {
     props.loginHandler(email, password)
   }
 
+
+  React.useEffect(() => {
+    validateForm();
+  }, [email, password]);
+
   return (
     <section className="login">
       <Header logoOnly={true} />
@@ -50,7 +55,7 @@ function Login(props) {
               name="email"
               autoComplete="off"
               required
-              onChange={(e) => { setEmail(e.currentTarget.value); validateForm() }}
+              onChange={(e) => { setEmail(e.currentTarget.value) }}
               value={email}
             />
 
@@ -68,7 +73,7 @@ function Login(props) {
               name="password"
               autoComplete="off"
               required
-              onChange={(e) => { setPassword(e.currentTarget.value); validateForm() }}
+              onChange={(e) => { setPassword(e.currentTarget.value); }}
               value={password}
             />
           </section>
