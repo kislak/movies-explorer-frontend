@@ -85,8 +85,8 @@ function SavedMovies(props) {
         searchHandler={searchSavedHandler}
         allowEmpty={true}
         source="savedMovies"
-        text={localStorage.getItem('savedMovieSearchText')}
-        short={localStorage.getItem('savedMovieSearchShortFlag')}
+        text={localStorage.getItem('savedMovieSearchText') || ''}
+        short={localStorage.getItem('savedMovieSearchShortFlag') === 'true'}
       />
       <MoviesCardList
         key="savedMoviesMCL"

@@ -115,7 +115,7 @@ function App(props) {
       fetchUserData()
       fetchUserMovies()
     }
-  }, []);
+  }, [currentUser]);
 
 
   return (

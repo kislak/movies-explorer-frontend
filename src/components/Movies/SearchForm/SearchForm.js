@@ -1,8 +1,8 @@
 import React from "react";
 import FilterCheckBox from "../FilterCheckbox/FilterCheckBox";
 function SearchForm(props) {
-  const [text, setText] = React.useState(props.text || '')
-  const [short, setShort] = React.useState(props.short === 'true')
+  const [text, setText] = React.useState(props.text)
+  const [short, setShort] = React.useState(props.short)
   const [showError, setShowError] = React.useState(false)
 
   const submitForm = (e) => {

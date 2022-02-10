@@ -62,6 +62,7 @@ function Movies(props) {
     setIsSearchTriggered(true)
     setRows(DEFULAT_ROWS_NUMBER)
 
+    debugger
     localStorage.setItem('movieSearchText', text)
     localStorage.setItem('movieSearchShortFlag', shortFlag)
 
@@ -83,7 +84,7 @@ function Movies(props) {
         key="moviesSF"
         searchHandler={searchHandler}
         text={localStorage.getItem('movieSearchText') || ''}
-        short={localStorage.getItem('movieSearchShortFlag') === 'true'}
+        short={(localStorage.getItem('movieSearchShortFlag') === 'true')}
       />
       {!loading &&
         <MoviesCardList
