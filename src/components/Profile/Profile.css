@@ -14,7 +14,6 @@
   text-align: center;
 }
 
-
 .profile__details {
   margin: 120px auto 0;
   max-width: 410px;
@@ -31,7 +30,8 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 17px;
+  margin-bottom: 0px;
+  margin-top: 17px;
   border-bottom: 1px solid #E8E8E8;
 }
 .profile__detail:last-child {
@@ -42,7 +42,6 @@
   border: none;
   text-align: right;
 }
-
 
 .profile__links {
   display: flex;
@@ -69,6 +68,11 @@
 
 .profile__link_red {
   color: #EE3465;
+}
+
+.profile__error {
+  color: #EE3465;
+  text-align: right;
 }
 
 .profile__submit {

@@ -8,25 +8,27 @@ function Profile(props) {
 
   const [name, setName] = React.useState(currentUser.name)
   const [email, setEmail] = React.useState(currentUser.email)
+  const [currentName, setCurrentName] = React.useState(currentUser.name)
+  const [currentEmail, setCurrentEmail] = React.useState(currentUser.name)
+
   const [serverError, setServerError] = React.useState(undefined);
   const [serverSuccess, setServerSuccess] = React.useState(undefined);
-  const [validName, setValidName] = React.useState(false)
-  const [validEmail, setValidEmail] = React.useState(false)
-  const [valid, setValid] = React.useState(false)
+  const [validName, setValidName] = React.useState(true)
+  const [validEmail, setValidEmail] = React.useState(true)
+  const [validForm, setValidForm] = React.useState(false)
 
-  const validNameCheck = () => {
-    return (name.length > 1 && name.length < 30)
+  const validNameCheck = (name) => {
+    const valid = (name.length > 1 && name.length < 30)
+    setValidName(valid)
   }
 
-  const validEmailCheck = () => {
-    return email.match(
+  const validEmailCheck = (email) => {
+    const valid = email.match(
       /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     );
-  };
 
-  const validateForm = () => {
-    setValid(validName && validEmail)
-  }
+    setValidEmail(valid)
+  };
 
   const submitForm = (e) => {
     e.preventDefault();
@@ -47,23 +49,24 @@ function Profile(props) {
 
   const nameChangeHandler = (e) => {
     e.preventDefault();
-
-    setName(e.target.value);
-    setValidName(validNameCheck(e.target.value))
-    setValidEmail(email)
+    setName(e.currentTarget.value);
+    validNameCheck(e.currentTarget.value)
   }
 
   const emailChangeHandler = (e) => {
     e.preventDefault();
-
-    setEmail(e.target.value)
-    setValidEmail(validEmailCheck(e.target.value))
-    setValidName(name)
+    setEmail(e.currentTarget.value)
+    validEmailCheck(e.currentTarget.value)
   }
 
   React.useEffect(() => {
-    validateForm();
-  }, [validName, validEmail]);
+    setValidForm(validName && validEmail && (email != currentEmail || name !== currentName))
+  }, [validName, validEmail, email, name, currentEmail, currentName]);
+
+  React.useEffect(() => {
+    setCurrentEmail(currentUser.email)
+    setCurrentName(currentUser.name)
+  }, [currentUser]);
 
   return (
     <section className="profile">
@@ -89,6 +92,11 @@ function Profile(props) {
               value={name}
             />
           </section>
+          {!validName &&
+          <p className="profile__error ">
+            некоректный формат имени пользователя
+          </p>
+          }
 
           <section className="profile__detail">
             <label className="profile__details-title" htmlFor="profile__input-email">
@@ -104,7 +112,12 @@ function Profile(props) {
               onChange={emailChangeHandler}
               value={email}
             />
-          </section>
+        </section>
+          {!validEmail &&
+          <p className="profile__error ">
+            некоректный формат email
+          </p>
+          }
         </section>
 
 
@@ -112,7 +125,7 @@ function Profile(props) {
           <button
             className="profile__submit"
             type="submit"
-            disabled={!valid}
+            disabled={!validForm}
           >
             Редактировать
           </button>
