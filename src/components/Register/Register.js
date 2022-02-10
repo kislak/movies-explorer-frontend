@@ -7,7 +7,7 @@ function Register(props) {
   const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
   const [validForm, setValidForm] = React.useState(false)
-  const [validName, setValidName] = React.useState(false)
+  const [validName, setValidName] = React.useState(true)
   const [validEmail, setValidEmail] = React.useState(true)
   const [validPassword, setValidPassword] = React.useState(true)
 
@@ -47,7 +47,7 @@ function Register(props) {
   }
 
   React.useEffect(() => {
-    setValidForm(validName && validEmail && validPassword && name)
+    setValidForm(validName && validEmail && validPassword && name.length != 0)
   }, [validName, validEmail, validPassword]);
 
   return (
