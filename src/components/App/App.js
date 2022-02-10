@@ -13,7 +13,7 @@ import moviesApi from "../../utils/MoviesApi";
 import mainApi from "../../utils/MainApi";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext.js"
 import ProtectedRoute from "../ProtectedRoute";
-
+import ProtectedRouteNotAuthOnly from "../ProtectedRouteNotAuthOnly"
 
 function App(props) {
   const [movies, setMovies] = React.useState([]);
@@ -121,18 +121,18 @@ function App(props) {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <Switch>
-        <Route path="/signup" exact>
+        <ProtectedRouteNotAuthOnly path="/signup" exact>
           <Register
             registerHandler={registerHandler}
             serverError={serverError}
           />
-        </Route>
-        <Route path="/signin" exact>
+        </ProtectedRouteNotAuthOnly>
+        <ProtectedRouteNotAuthOnly path="/signin" exact>
           <Login
             loginHandler={loginHandler}
             serverError={serverError}
           />
-        </Route>
+        </ProtectedRouteNotAuthOnly>
 
         <Route path="/" exact>
           <Main/>
