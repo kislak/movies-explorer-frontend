@@ -115,7 +115,7 @@ function App(props) {
       fetchUserData()
       fetchUserMovies()
     }
-  }, []);
+  }, [localStorage.getItem("loggedin")]);
 
 
   return (
