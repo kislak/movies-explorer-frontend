@@ -58,6 +58,8 @@ function App(props) {
       fetchUserMovies();
       history.push('/movies');
     }).catch((err) => {
+      setServerError(`${err}. Ошибка авторизации. Неверный email или password`);
+      setTimeout(() => setServerError(undefined), 10000);
       console.log(err);
     })
   }
@@ -128,6 +130,7 @@ function App(props) {
         <Route path="/signin" exact>
           <Login
             loginHandler={loginHandler}
+            serverError={serverError}
           />
         </Route>
 
