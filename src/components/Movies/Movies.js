@@ -25,7 +25,7 @@ function Movies(props) {
 
     if (moviesWithRefs.length) {
       const text = localStorage.getItem('movieSearchText') || ''
-      const shortFlag = (localStorage.getItem('movieSearchShortFlag') === true)
+      const shortFlag = (localStorage.getItem('movieSearchShortFlag') === 'true')
 
       const result = moviesWithRefs.filter((item) => {
         if (shortFlag && item.duration > SHORT_DURATION) {
