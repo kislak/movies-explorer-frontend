@@ -6,59 +6,47 @@ function Register(props) {
   const [name, setName] = React.useState('')
   const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
-  const [valid, setValid] = React.useState(false)
+  const [validForm, setValidForm] = React.useState(false)
   const [validName, setValidName] = React.useState(true)
   const [validEmail, setValidEmail] = React.useState(true)
   const [validPassword, setValidPassword] = React.useState(true)
 
-  const validNameCheck = () => {
+  const validNameCheck = (name) => {
     return name.length > 1 && name.length < 30
   }
 
-  const validEmailCheck = () => {
+  const validEmailCheck = (email) => {
     return email.match(
       /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     );
   };
 
-  const validPasswordCheck = () => {
+  const validPasswordCheck = (password) => {
     return password.match(/^[a-zA-Z0-9!@#$%^&*]{8,}$/);
   };
 
   const nameChangeHandler = (e) => {
-    setName(e.target.value);
+    setName(e.currentTarget.value);
+    setValidName(validNameCheck(e.currentTarget.value))
   }
 
   const emailChangeHandler = (e) => {
-    setEmail(e.target.value)
+    setEmail(e.currentTarget.value)
+    setValidEmail(validEmailCheck(e.currentTarget.value))
   }
 
   const passwordChangeHandler = (e) => {
-    setPassword(e.target.value)
+    setPassword(e.currentTarget.value)
+    setValidPassword(validPasswordCheck(e.currentTarget.value))
   }
 
   const submitForm = (e) => {
     e.preventDefault();
-
-    if (valid) {
-      props.registerHandler(name, email, password)
-    }
+    props.registerHandler(name, email, password)
   }
 
   React.useEffect(() => {
-    setValidName(validNameCheck())
-  }, [name]);
-
-  React.useEffect(() => {
-    setValidEmail(validEmailCheck())
-  }, [email]);
-
-  React.useEffect(() => {
-    setValidPassword(validPasswordCheck())
-  }, [password]);
-
-  React.useEffect(() => {
-    setValid(validName && validEmail && validPassword)
+    setValidForm(validName && validEmail && validPassword)
   }, [validName, validEmail, validPassword]);
 
   return (
@@ -71,59 +59,86 @@ function Register(props) {
 
         <form className="register__form" name="register" onSubmit={submitForm}>
           <section className="register__fields">
-          <label
-            htmlFor="register__input-name"
-            className={`register__input-label ${!validName && 'register__input_error'}`}
-          >
-            Имя
-          </label>
+            <section className="register__field">
 
-          <input
-            id="register__input-name"
-            className={`register__input ${!validName && 'register__input_error'}`}
-            type="text"
-            name="name"
-            autoComplete="off"
-            required
-            onChange={nameChangeHandler}
-            value={name}
-          />
+              <label
+                htmlFor="register__input-name"
+                className={`register__input-label ${!validName && 'register__input_error'}`}
+              >
+                Имя
+              </label>
 
-          <label
-            htmlFor="register__input-name"
-            className={`register__input-label ${!validEmail && 'register__input_error'}`}
-          >
-            E-mail
-          </label>
+              <input
+                id="register__input-name"
+                className={`register__input ${!validName && 'register__input_error'}`}
+                type="text"
+                name="name"
+                autoComplete="off"
+                required
+                onChange={nameChangeHandler}
+                value={name}
+              />
+              {!validName &&
+              <p className="login__error ">
+                некоректный формат имени пользователя
+              </p>
+              }
+            </section>
 
-          <input
-            id="register__input-email"
-            className={`register__input ${!validEmail && 'register__input_error'}`}
-            type="text"
-            name="email"
-            autoComplete="off"
-            required
-            onChange={emailChangeHandler}
-            value={email}
-          />
+            <section className="register__field">
 
-          <label
-            htmlFor="register__input-name"
-            className={`register__input-label ${!validPassword && 'register__input_error'}`}
-          >
-            Пароль
-          </label>
 
-          <input
-            id="register__input-password"
-            className={`register__input ${!validPassword && 'register__input_error'}`}
-            type="password"
-            name="password"
-            autoComplete="off"
-            required
-            onChange={passwordChangeHandler}
-            value={password}
-          />
+              <label
+                htmlFor="register__input-name"
+                className={`register__input-label ${!validEmail && 'register__input_error'}`}
+              >
+                E-mail
+              </label>
+
+              <input
+                id="register__input-email"
+                className={`register__input ${!validEmail && 'register__input_error'}`}
+                type="text"
+                name="email"
+                autoComplete="off"
+                required
+                onChange={emailChangeHandler}
+                value={email}
+              />
+              {!validEmail &&
+              <p className="login__error ">
+                некоректный формат email
+              </p>
+              }
+
+            </section>
+
+            <section className="register__field">
+
+              <label
+                htmlFor="register__input-name"
+                className={`register__input-label ${!validPassword && 'register__input_error'}`}
+              >
+                Пароль
+              </label>
+
+              <input
+                id="register__input-password"
+                className={`register__input ${!validPassword && 'register__input_error'}`}
+                type="password"
+                name="password"
+                autoComplete="off"
+                required
+                onChange={passwordChangeHandler}
+                value={password}
+              />
+              {!validPassword &&
+              <p className="login__error ">
+                некоректный формат пароля
+              </p>
+              }
+
+            </section>
             <p className="register__error-text">
               {props.serverError}
             </p>
@@ -131,7 +146,7 @@ function Register(props) {
           </section>
           <button
             className="register__submit"
-            disabled={!valid}
+            disabled={!validForm}
             type="submit"
           >
             Зарегистрироваться
