@@ -51,6 +51,10 @@
   cursor: pointer;
 }
 
+.search-form__error {
+  color: red;
+}
+
 .search-form__checkbox {
   margin: 30px auto;
 }

@@ -1,15 +1,13 @@
 import React from "react";
-
-import { useNavigate } from "react-router-dom/index";
 import Navigation from "../Navigation/Navigation";
+import { Link } from 'react-router-dom';
 
 function Header(props) {
-  const navigate = useNavigate();
   return (
     <header className="header">
-      <div
+      <Link
         className="header__logo"
-        onClick={() => navigate('/')}
+        to='/'
       />
       {!props.logoOnly && <Navigation/> }
     </header>
